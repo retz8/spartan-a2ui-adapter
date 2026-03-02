@@ -9,6 +9,12 @@ Two core artifacts:
 - `spartan_catalog.json` — component catalog in A2UI catalog format
 - Component mappings — Angular-specific binding logic for each component
 
+## Learning Notes Convention
+Research and learning from reading A2UI source, Spartan docs, or Angular ecosystem is recorded under `personal/A2UI/` in the workspace root (not in this repo).
+
+- Angular renderer deep-dive → `personal/A2UI/angular-renderer/`
+- Add a new markdown file per topic as understanding grows
+
 ## Related
 - A2UI protocol: https://github.com/google/a2ui
 - A2UI Angular Renderer: https://github.com/google/A2UI/tree/main/renderers/angular
