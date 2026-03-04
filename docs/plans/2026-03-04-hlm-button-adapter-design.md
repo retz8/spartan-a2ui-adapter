@@ -11,7 +11,7 @@
 Build an A2UI catalog adapter that maps Spartan UI's Button component to the A2UI protocol. The adapter is a library — consuming Angular apps plug it in to get Spartan-rendered A2UI surfaces.
 
 Two core artifacts:
-- `spartan_catalog.json` — agent-side JSON Schema teaching the LLM what `HlmButton` is and what props it accepts
+- `catalogs/spartan/v0.8.0/catalog.json` — agent-side JSON Schema teaching the LLM what `HlmButton` is and what props it accepts
 - `SPARTAN_CATALOG` — renderer-side TypeScript catalog object mapping `HlmButton` to an Angular wrapper component
 
 A mock app renders the same button two ways side-by-side (A2UI-rendered vs native Spartan) for visual parity verification.
@@ -51,7 +51,10 @@ spartan-a2ui-adapter/
 │       │   │   └── theme.ts
 │       │   └── styles.css
 │       └── project.json
-├── spartan_catalog.json             # agent-side schema (repo root)
+├── catalogs/
+│   └── spartan/
+│       └── v0.8.0/
+│           └── catalog.json        # agent-side schema (versioned)
 └── docs/
     └── plans/
 ```
@@ -66,10 +69,10 @@ Library consumed via TS path alias `@spartan-a2ui-adapter` in `tsconfig.base.jso
 
 ```ts
 export const SPARTAN_CATALOG_ID =
-  'https://github.com/jiohin/spartan-a2ui-adapter/blob/main/spartan_catalog.json';
+  'https://github.com/jiohin/spartan-a2ui-adapter/blob/main/catalogs/spartan/v0.8.0/catalog.json';
 ```
 
-Stable URI — opaque identifier, not fetched at runtime. Agent and client must agree on this string.
+Versioned URI — opaque identifier, not fetched at runtime. Agent and client must agree on this string. Version scheme: `v{a2ui_spec}.{catalog_revision}` (e.g. `v0.8.0` = A2UI spec v0.8, catalog revision 0).
 
 ### `components/hlm-button/hlm-button-wrapper.component.ts`
 
@@ -93,8 +96,8 @@ export const SPARTAN_CATALOG = {
     type: () => import('./components/hlm-button/hlm-button-wrapper.component')
                .then(r => r.HlmButtonWrapperComponent),
     bindings: ({ properties }) => [
-      inputBinding('variant', () => properties['variant'] || 'default'),
-      inputBinding('size',    () => properties['size']    || 'default'),
+      inputBinding('variant', () => ('variant' in properties && properties['variant']) || 'default'),
+      inputBinding('size',    () => ('size' in properties && properties['size']) || 'default'),
     ],
   },
 } as Catalog;
@@ -110,19 +113,26 @@ Spreads `DEFAULT_CATALOG` so standard A2UI components (`Text`, `Row`, `Column`, 
 
 ---
 
-## Agent-Side Catalog (`spartan_catalog.json`)
+## Agent-Side Catalog (`catalogs/spartan/v0.8.0/catalog.json`)
 
 v0.8 format, matching rizzcharts pattern. The Angular renderer (`@a2ui/angular` v0.8.4) only supports v0.8 — upgrade to v0.9 format is a future task once Google ships v0.9 Angular renderer support.
 
-HlmButton definition:
+The `components` object inlines all standard catalog components (copied from `standard_catalog_definition.json`) plus adds `HlmButton`. No `$ref` — matches the rizzcharts pattern exactly.
+
+HlmButton definition (shown alone; full file also contains all standard components):
 
 ```json
 {
-  "catalogId": "https://github.com/jiohin/spartan-a2ui-adapter/blob/main/spartan_catalog.json",
+  "catalogId": "https://github.com/jiohin/spartan-a2ui-adapter/blob/main/catalogs/spartan/v0.8.0/catalog.json",
   "components": {
-    "$ref": "https://a2ui.org/specification/v0_8/standard_catalog_definition.json#/components",
+    "Text": { "..." : "inlined from standard catalog" },
+    "Row": { "..." : "inlined from standard catalog" },
+    "Column": { "..." : "inlined from standard catalog" },
+    "Button": { "..." : "inlined from standard catalog" },
+    "...": "all other standard components inlined",
     "HlmButton": {
       "type": "object",
+      "additionalProperties": false,
       "description": "A styled button using Spartan UI. Supports visual variants and sizes.",
       "properties": {
         "variant": {
@@ -134,10 +144,38 @@ HlmButton definition:
           "enum": ["default", "sm", "lg", "icon"]
         },
         "child": {
-          "$ref": "#/components"
+          "type": "string",
+          "description": "The ID of the component to display in the button, typically a Text component."
         },
         "action": {
-          "$ref": "https://a2ui.org/specification/v0_8/standard_catalog_definition.json#/definitions/Action"
+          "type": "object",
+          "description": "The client-side action to be dispatched when the button is clicked.",
+          "additionalProperties": false,
+          "properties": {
+            "name": { "type": "string" },
+            "context": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "key": { "type": "string" },
+                  "value": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "path": { "type": "string" },
+                      "literalString": { "type": "string" },
+                      "literalNumber": { "type": "number" },
+                      "literalBoolean": { "type": "boolean" }
+                    }
+                  }
+                },
+                "required": ["key", "value"]
+              }
+            }
+          },
+          "required": ["name"]
         }
       },
       "required": ["child", "action"]
@@ -178,7 +216,7 @@ provideA2UI({ catalog: SPARTAN_CATALOG, theme: minimalTheme })
 
 ### `fixtures/button-fixture.json`
 
-Hardcoded A2UI v0.9 JSONL payload — the same JSON an agent would generate. Contains surface updates with `HlmButton` nodes across all variant/size combinations. Each button's child is a `Text` component.
+Hardcoded A2UI v0.8 JSON payload — the same JSON an agent would generate. Message order follows v0.8 convention: `surfaceUpdate` first (flat component array), then `beginRendering` last. Contains `HlmButton` components across all variant/size combinations. Each button's `child` is a component ID string referencing a separate `Text` component in the array. No `dataModelUpdate` needed (all text uses `literalString`).
 
 No Python agent needed — pure Angular fixture-driven rendering.
 

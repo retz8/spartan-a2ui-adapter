@@ -5,6 +5,11 @@
       "source": "alfredoperez/angular-best-practices",
       "sourceType": "github",
       "computedHash": "89da02751972cc693c29f37edb75dab3051147ea9d4a03690915aa79afaff8b8"
+    },
+    "brainstorming": {
+      "source": "obra/superpowers",
+      "sourceType": "github",
+      "computedHash": "5cafa1558b0b6bd4d4c71f23d5567b7fcbbcdb4b0a50b0c5f69a80a3cebaf9b8"
     }
   }
 }
