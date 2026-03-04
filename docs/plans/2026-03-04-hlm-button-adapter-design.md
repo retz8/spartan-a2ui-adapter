@@ -2,7 +2,7 @@
 
 **Date:** 2026-03-04
 **Scope:** HlmButton only (v1)
-**A2UI spec target:** v0.9
+**A2UI spec target:** v0.8 (upgrade to v0.9 once Angular renderer adopts it)
 
 ---
 
@@ -112,45 +112,39 @@ Spreads `DEFAULT_CATALOG` so standard A2UI components (`Text`, `Row`, `Column`, 
 
 ## Agent-Side Catalog (`spartan_catalog.json`)
 
-v0.9 JSON Schema format. Key structural differences from v0.8:
-- `allOf` composition with `ComponentCommon` + `CatalogComponentCommon` + component-specific props
-- `child` is a `ComponentId` (string reference), not an inline component object
-- Dynamic values use `DynamicString` (plain string literal or `{ path }` or function call)
-- `unevaluatedProperties: false` for strict validation
+v0.8 format, matching rizzcharts pattern. The Angular renderer (`@a2ui/angular` v0.8.4) only supports v0.8 — upgrade to v0.9 format is a future task once Google ships v0.9 Angular renderer support.
 
 HlmButton definition:
 
 ```json
 {
-  "HlmButton": {
-    "type": "object",
-    "allOf": [
-      { "$ref": "../../common_types.json#/$defs/ComponentCommon" },
-      { "$ref": "#/$defs/CatalogComponentCommon" },
-      {
-        "type": "object",
-        "properties": {
-          "component": { "const": "HlmButton" },
-          "child": { "$ref": "../../common_types.json#/$defs/ComponentId" },
-          "variant": {
-            "type": "string",
-            "enum": ["default", "destructive", "outline", "secondary", "ghost", "link"]
-          },
-          "size": {
-            "type": "string",
-            "enum": ["default", "sm", "lg", "icon"]
-          },
-          "action": { "$ref": "../../common_types.json#/$defs/Action" }
+  "catalogId": "https://github.com/jiohin/spartan-a2ui-adapter/blob/main/spartan_catalog.json",
+  "components": {
+    "$ref": "https://a2ui.org/specification/v0_8/standard_catalog_definition.json#/components",
+    "HlmButton": {
+      "type": "object",
+      "description": "A styled button using Spartan UI. Supports visual variants and sizes.",
+      "properties": {
+        "variant": {
+          "type": "string",
+          "enum": ["default", "destructive", "outline", "secondary", "ghost", "link"]
         },
-        "required": ["component", "child", "action"]
-      }
-    ],
-    "unevaluatedProperties": false
+        "size": {
+          "type": "string",
+          "enum": ["default", "sm", "lg", "icon"]
+        },
+        "child": {
+          "$ref": "#/components"
+        },
+        "action": {
+          "$ref": "https://a2ui.org/specification/v0_8/standard_catalog_definition.json#/definitions/Action"
+        }
+      },
+      "required": ["child", "action"]
+    }
   }
 }
 ```
-
-Must also add `HlmButton` to `$defs/anyComponent` oneOf discriminator list.
 
 ---
 

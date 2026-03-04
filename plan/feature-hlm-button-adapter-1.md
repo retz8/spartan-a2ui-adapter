@@ -1,0 +1,158 @@
+---
+goal: Implement HlmButton A2UI catalog adapter with Nx monorepo and visual parity mock app
+version: 1.0
+date_created: 2026-03-04
+last_updated: 2026-03-04
+owner: Jioh In
+status: Planned
+tags: [feature, adapter, a2ui, spartan, angular]
+---
+
+# Introduction
+
+![Status: Planned](https://img.shields.io/badge/status-Planned-blue)
+
+Implement the first A2UI catalog adapter for Spartan UI, scoped to a single component: `HlmButton`. This plan covers the full vertical slice — Nx workspace scaffolding, the adapter library (wrapper component + catalog object + catalog ID), the agent-side JSON Schema catalog, and a fixture-driven mock app that renders Spartan buttons via A2UI side-by-side with native Spartan buttons for visual parity verification.
+
+Design document: `docs/plans/2026-03-04-hlm-button-adapter-design.md`
+
+## 1. Requirements & Constraints
+
+- **REQ-001**: Adapter library must export `SPARTAN_CATALOG`, `SPARTAN_CATALOG_ID`, and `HlmButtonWrapperComponent`
+- **REQ-002**: `SPARTAN_CATALOG` must spread `DEFAULT_CATALOG` so all standard A2UI components remain available as children
+- **REQ-003**: `HlmButtonWrapperComponent` must use `hlmBtn` directive (not `[class]="theme.components.Button"`) — Spartan handles all styling
+- **REQ-004**: `HlmButtonWrapperComponent` must render child content via `ng-container[a2ui-renderer]`, not a plain string label
+- **REQ-005**: `spartan_catalog.json` must follow A2UI v0.8 catalog format (matching `rizzcharts_catalog_definition.json` structure: flat `catalogId` + `components` object with `$ref` to standard catalog, component properties as JSON Schema objects). Upgrade to v0.9 format will be a separate task once the Angular renderer adopts v0.9.
+- **REQ-006**: Mock app must render A2UI-rendered and native Spartan buttons side-by-side on one page for visual comparison
+- **REQ-007**: Mock app must use hardcoded fixture JSON (no Python agent required)
+- **CON-001**: Angular renderer (`@a2ui/angular` v0.8.4) uses v0.8 message format (`beginRendering`, `surfaceUpdate`, `dataModelUpdate`). The v0.9 `MessageProcessor` exists in `@a2ui/web_core/v0_9` but the Angular renderer has not adopted it yet. All artifacts (catalog JSON, fixture messages, TypeScript types) target v0.8. Upgrade to v0.9 is a separate future task tracked as a follow-up once Google's A2UI team ships v0.9 Angular renderer support.
+- **CON-002**: Development environment is via VSCode tunnel — all `localhost` URLs need tunnel URL substitution for browser testing
+- **CON-003**: `@a2ui/angular` requires Angular 21+ (`@angular/core: ^21.0.0`)
+- **GUD-001**: Wrapper components must set host styles `display: block; flex: var(--weight); min-height: 0;` for A2UI layout compatibility
+- **GUD-002**: Wrapper components must never reference `this.theme` — Spartan self-styles via Tailwind + CSS variables
+- **PAT-001**: Follow rizzcharts catalog pattern for both JSON schema and TypeScript catalog object structure
+- **PAT-002**: Use `Types.CustomNode` as the generic type parameter for `DynamicComponent` since Spartan props don't fit standard A2UI node shapes
+
+## 2. Implementation Steps
+
+### Phase 1: Nx Workspace Scaffolding
+
+- GOAL-001: Initialize Nx monorepo with Angular preset, create library and app projects, configure path aliases and Tailwind
+
+| Task | Description | Completed | Date |
+|------|-------------|-----------|------|
+| TASK-001 | Clean current repo contents (preserve `.git/`, `docs/`, `CLAUDE.md`, `.agents/`, `.gitignore`, `LICENSE`). Remove stale `spartan_catalog.json` (empty file) and `README.md` (empty file). | | |
+| TASK-002 | Initialize Nx workspace with Angular preset: `npx create-nx-workspace@latest spartan-a2ui-adapter --preset=angular-monorepo --appName=mock --style=css --ssr=false --e2eTestRunner=none`. Adjust if Nx prompts differ — the goal is an Angular workspace with one app named `mock`. | | |
+| TASK-003 | Generate the adapter library project: `npx nx g @nx/angular:library spartan-a2ui-adapter --directory=libs/spartan-a2ui-adapter --publishable --importPath=@spartan-a2ui-adapter`. Verify `tsconfig.base.json` contains path alias `@spartan-a2ui-adapter` pointing to `libs/spartan-a2ui-adapter/src/index.ts`. | | |
+| TASK-004 | Install Spartan dependencies: `npm install @spartan-ng/brain @spartan-ng/helm`. Then generate Spartan button component: `npx nx g @spartan-ng/cli:ui button`. Verify `@spartan-ng/helm/button` exports `HlmButtonImports` and `@spartan-ng/brain/button` exports `BrnButton`. | | |
+| TASK-005 | Install A2UI dependencies: `npm install @a2ui/angular @a2ui/web_core`. Verify imports resolve: `import { DynamicComponent, Catalog, DEFAULT_CATALOG, provideA2UI, Surface } from '@a2ui/angular'` and `import * as Types from '@a2ui/web_core/types/types'`. | | |
+| TASK-006 | Configure Tailwind CSS v4 for the workspace. Spartan requires Tailwind for styling. Follow Angular + Tailwind v4 setup: ensure `@tailwindcss/postcss` is configured in `postcss.config.js`, `@import "tailwindcss"` is in `apps/mock/src/styles.css`, and Spartan's Tailwind plugin is loaded if required. | | |
+| TASK-007 | Verify workspace builds: `npx nx build spartan-a2ui-adapter` and `npx nx serve mock` both succeed with zero errors. Fix any dependency or configuration issues. | | |
+
+### Phase 2: Adapter Library Implementation
+
+- GOAL-002: Implement the three core library files: catalog ID constant, HlmButton wrapper component, and catalog object with barrel exports
+
+| Task | Description | Completed | Date |
+|------|-------------|-----------|------|
+| TASK-008 | Create `libs/spartan-a2ui-adapter/src/lib/catalog-id.ts`. Export `SPARTAN_CATALOG_ID` as a string constant: `'https://github.com/jiohin/spartan-a2ui-adapter/blob/main/spartan_catalog.json'`. | | |
+| TASK-009 | Create directory `libs/spartan-a2ui-adapter/src/lib/components/hlm-button/`. Create file `hlm-button-wrapper.component.ts` with the following implementation: (1) `@Component` with selector `a2ui-hlm-button`, (2) `imports: [HlmButtonImports, Renderer]` where `Renderer` is from `@a2ui/angular` and `HlmButtonImports` from `@spartan-ng/helm/button`, (3) template containing `<button hlmBtn [variant]="variant()" [size]="size()" (click)="handleClick()">` wrapping `<ng-container a2ui-renderer [surfaceId]="surfaceId()!" [component]="component().properties.child" />`, (4) host styles `:host { display: block; flex: var(--weight); min-height: 0; }`, (5) class `HlmButtonWrapperComponent extends DynamicComponent<Types.CustomNode>` with `readonly variant = input<string>('default')` and `readonly size = input<string>('default')`, (6) `handleClick()` method that reads `this.component().properties['action']` and calls `super.sendAction(action)` if it exists. | | |
+| TASK-010 | Create `libs/spartan-a2ui-adapter/src/lib/catalog.ts`. Import `Catalog`, `DEFAULT_CATALOG` from `@a2ui/angular`, `inputBinding` from `@angular/core`. Export `SPARTAN_CATALOG` as `{ ...DEFAULT_CATALOG, HlmButton: { type: () => import('./components/hlm-button/hlm-button-wrapper.component').then(r => r.HlmButtonWrapperComponent), bindings: ({ properties }) => [inputBinding('variant', () => properties['variant'] \|\| 'default'), inputBinding('size', () => properties['size'] \|\| 'default')] } } as Catalog`. | | |
+| TASK-011 | Update `libs/spartan-a2ui-adapter/src/index.ts` barrel exports: `export { SPARTAN_CATALOG } from './lib/catalog'`, `export { SPARTAN_CATALOG_ID } from './lib/catalog-id'`, `export { HlmButtonWrapperComponent } from './lib/components/hlm-button/hlm-button-wrapper.component'`. | | |
+| TASK-012 | Verify library builds: `npx nx build spartan-a2ui-adapter`. Fix any compilation errors. Ensure no references to `this.theme` exist in the wrapper component. | | |
+
+### Phase 3: Agent-Side Catalog JSON Schema
+
+- GOAL-003: Create `spartan_catalog.json` at repo root following v0.8 catalog format (matching rizzcharts pattern), defining HlmButton with variant/size enums and child/action properties
+
+| Task | Description | Completed | Date |
+|------|-------------|-----------|------|
+| TASK-013 | Create `spartan_catalog.json` at repo root. Top-level structure matching rizzcharts: `{ "catalogId": "https://github.com/jiohin/spartan-a2ui-adapter/blob/main/spartan_catalog.json", "components": { "$ref": "https://a2ui.org/specification/v0_8/standard_catalog_definition.json#/components" } }`. The `$ref` pulls in all standard catalog components so the LLM knows about `Text`, `Row`, `Column`, etc. | | |
+| TASK-014 | Add `HlmButton` to the `components` object. Structure: `"HlmButton": { "type": "object", "description": "A styled button using Spartan UI. Supports visual variants and sizes. Child is a component reference (typically Text).", "properties": { "variant": { "type": "string", "enum": ["default","destructive","outline","secondary","ghost","link"], "description": "Visual style of the button." }, "size": { "type": "string", "enum": ["default","sm","lg","icon"], "description": "Size of the button." }, "child": { "description": "Reference to a child component (typically Text) for the button label.", "$ref": "#/components" }, "action": { "description": "Action dispatched on click.", "$ref": "https://a2ui.org/specification/v0_8/standard_catalog_definition.json#/definitions/Action" } }, "required": ["child", "action"] }`. | | |
+| TASK-015 | Validate `spartan_catalog.json` is valid JSON. Cross-reference structure against `A2UI/samples/agent/adk/rizzcharts/rizzcharts_catalog_definition.json` to confirm structural parity (same top-level shape: `catalogId`, `components` with `$ref` + custom entries). | | |
+
+### Phase 4: Mock App — Fixture and Comparison UI
+
+- GOAL-004: Build the mock app that renders HlmButton via A2UI fixture payload alongside native Spartan buttons for side-by-side visual comparison
+
+| Task | Description | Completed | Date |
+|------|-------------|-----------|------|
+| TASK-016 | Create `apps/mock/src/app/fixtures/button-fixture.json`. This is a JSON array of v0.8 `ServerToClientMessage` objects. Structure: (1) `beginRendering` message with `surfaceId` and `catalogId` matching `SPARTAN_CATALOG_ID`, (2) `surfaceUpdate` message containing the component tree — a root `Column` with children: one `HlmButton` per variant (`default`, `destructive`, `outline`, `secondary`, `ghost`, `link`) and one per non-default size (`sm`, `lg`, `icon`), each with a `Text` child node as label. Reference `A2UI/specification/v0_8/json/server_to_client.json` for exact message schema and rizzcharts examples for the component tree shape. | | |
+| TASK-017 | Create `apps/mock/src/app/theme.ts`. Export `minimalTheme` object satisfying the `Theme` type from `@a2ui/angular`. Only needs to cover `DEFAULT_CATALOG` components used as children (`Text`). Reference the theme structure from an existing sample app (e.g., `A2UI/samples/client/angular/projects/rizzcharts/src/theme.ts` or similar). Spartan components ignore the theme, so keep it minimal. | | |
+| TASK-018 | Update `apps/mock/src/app/app.config.ts`. Import `provideA2UI` from `@a2ui/angular`, `SPARTAN_CATALOG` from `@spartan-a2ui-adapter`, and `minimalTheme` from `./theme`. Add `provideA2UI({ catalog: SPARTAN_CATALOG, theme: minimalTheme })` to the providers array. Also import `HlmButtonImports` from `@spartan-ng/helm/button` for the native side. | | |
+| TASK-019 | Update `apps/mock/src/app/app.component.ts` to render a side-by-side comparison layout. Left column: inject `MessageProcessor` from `@a2ui/angular`, call `processor.processMessages()` with the fixture JSON in `ngOnInit`, render surfaces using `<a2ui-surface>` component with `[surfaceId]` and `[surface]` inputs from `processor.getSurfaces()`. Right column: native Spartan buttons using `<button hlmBtn variant="default">Click me</button>`, `<button hlmBtn variant="destructive">Delete</button>`, etc. — one button per variant/size matching the fixture. Use CSS grid or flexbox for the two-column layout with headers "A2UI Rendered" and "Native Spartan". | | |
+| TASK-020 | Update `apps/mock/src/styles.css` to import Tailwind: `@import "tailwindcss";`. Add any Spartan Tailwind preset/plugin imports if required by the Spartan installation. | | |
+| TASK-021 | Serve the mock app: `npx nx serve mock`. Verify both columns render. The A2UI column should show Spartan-styled buttons (via the adapter). The native column shows plain Spartan buttons. Visual comparison: buttons in both columns must have identical styling (colors, border-radius, padding, font). Document any visual discrepancies. | | |
+
+### Phase 5: Verification and Cleanup
+
+- GOAL-005: Ensure everything builds, the adapter library is correctly consumed, and the repo is clean for commit
+
+| Task | Description | Completed | Date |
+|------|-------------|-----------|------|
+| TASK-022 | Run full workspace build: `npx nx run-many --target=build --all`. Verify zero errors. | | |
+| TASK-023 | Verify library output: check `dist/libs/spartan-a2ui-adapter/` contains the built package with correct exports in `package.json`. Confirm `@spartan-a2ui-adapter` path alias resolves correctly in the mock app. | | |
+| TASK-024 | Review all files for accidental `this.theme` references in wrapper component, missing host styles, or incorrect import paths. Ensure `HlmButtonWrapperComponent` extends `DynamicComponent<Types.CustomNode>` (not `Types.ButtonNode`). | | |
+| TASK-025 | Update `README.md` at repo root with: project description, quick start instructions (`npx nx serve mock`), library usage instructions (how to import `SPARTAN_CATALOG` and `SPARTAN_CATALOG_ID` in a consuming app), and link to design doc. | | |
+| TASK-026 | Commit all changes with descriptive commit messages. Suggested structure: one commit per phase, or one atomic commit if preferred. | | |
+
+## 3. Alternatives
+
+- **ALT-001**: Angular CLI workspace instead of Nx — rejected because Nx provides better library build tooling, TS path aliases out of the box, and is the modern standard for Angular library development.
+- **ALT-002**: Plain `label` string property instead of `child` component node for button content — rejected because it breaks A2UI's composition model and would need to be deprecated later. Option B (child renderer) is the canonical approach.
+- **ALT-003**: Full Python ADK agent for the mock app — deferred. Fixture-driven testing is sufficient for v1 and eliminates Python/Gemini API key dependencies. Agent integration planned as a follow-up.
+- **ALT-004**: `npm link` for library consumption instead of Nx path aliases — rejected because `npm link` is brittle and adds friction during development.
+
+## 4. Dependencies
+
+- **DEP-001**: `@a2ui/angular` (v0.8.4+) — Angular renderer providing `DynamicComponent`, `Catalog`, `DEFAULT_CATALOG`, `provideA2UI`, `Surface`, `Renderer`, `MessageProcessor`
+- **DEP-002**: `@a2ui/web_core` — Shared types (`Types.CustomNode`, `Types.Action`, `Types.AnyComponentNode`, `Primitives.*`)
+- **DEP-003**: `@spartan-ng/helm/button` — Spartan button helm layer (`HlmButtonImports`, `hlmBtn` directive, variant/size inputs)
+- **DEP-004**: `@spartan-ng/brain/button` — Spartan button brain layer (accessibility behavior, `BrnButton` with `disabled` input)
+- **DEP-005**: `@angular/core` (^21.0.0) — Required by `@a2ui/angular`. Provides `inputBinding`, `input`, `Component`, `Directive`, etc.
+- **DEP-006**: Tailwind CSS v4 — Required by Spartan for all styling. Must be configured at workspace level.
+- **DEP-007**: Nx — Workspace tooling for monorepo management, library builds, and path aliases.
+
+## 5. Files
+
+- **FILE-001**: `spartan_catalog.json` — Agent-side catalog at repo root. Defines `HlmButton` component in v0.8 format (matching rizzcharts pattern) with variant/size enums, child reference, and Action.
+- **FILE-002**: `libs/spartan-a2ui-adapter/src/lib/catalog-id.ts` — Exports `SPARTAN_CATALOG_ID` URI constant.
+- **FILE-003**: `libs/spartan-a2ui-adapter/src/lib/components/hlm-button/hlm-button-wrapper.component.ts` — Angular wrapper component extending `DynamicComponent<Types.CustomNode>`. Applies `hlmBtn` directive, binds variant/size, renders child via `a2ui-renderer`, dispatches action via `sendAction()`.
+- **FILE-004**: `libs/spartan-a2ui-adapter/src/lib/catalog.ts` — Exports `SPARTAN_CATALOG` object spreading `DEFAULT_CATALOG` + HlmButton entry with `inputBinding` mappings.
+- **FILE-005**: `libs/spartan-a2ui-adapter/src/index.ts` — Barrel exports for the library.
+- **FILE-006**: `apps/mock/src/app/fixtures/button-fixture.json` — Hardcoded A2UI message payload with HlmButton across all variant/size combos.
+- **FILE-007**: `apps/mock/src/app/theme.ts` — Minimal theme for `DEFAULT_CATALOG` components.
+- **FILE-008**: `apps/mock/src/app/app.config.ts` — App configuration wiring `provideA2UI` with `SPARTAN_CATALOG`.
+- **FILE-009**: `apps/mock/src/app/app.component.ts` — Side-by-side comparison layout (A2UI-rendered vs native Spartan).
+- **FILE-010**: `apps/mock/src/styles.css` — Tailwind import and global styles.
+
+## 6. Testing
+
+- **TEST-001**: Library build verification — `npx nx build spartan-a2ui-adapter` completes with zero errors and produces correct output in `dist/`.
+- **TEST-002**: Mock app build verification — `npx nx build mock` completes with zero errors.
+- **TEST-003**: Visual parity test — serve mock app (`npx nx serve mock`), visually confirm A2UI-rendered HlmButton matches native Spartan HlmButton for every variant (`default`, `destructive`, `outline`, `secondary`, `ghost`, `link`) and every size (`default`, `sm`, `lg`, `icon`). Same colors, border-radius, padding, font-size, hover states.
+- **TEST-004**: Child rendering test — verify button label text (from `Text` child component) renders correctly inside the A2UI-rendered button.
+- **TEST-005**: Action dispatch test — add a click handler or console.log to verify `sendAction()` fires when clicking the A2UI-rendered button (check browser console for dispatched event).
+- **TEST-006**: Catalog JSON validation — validate `spartan_catalog.json` is well-formed JSON. Ensure structural parity with `A2UI/samples/agent/adk/rizzcharts/rizzcharts_catalog_definition.json` (same top-level shape: `catalogId`, `components` with `$ref` + custom entries).
+
+## 7. Risks & Assumptions
+
+- **RISK-001**: All artifacts target v0.8. When Google's A2UI team ships v0.9 Angular renderer support, a separate upgrade task is needed to migrate the catalog JSON schema (to `allOf` composition, `ComponentId` child, `unevaluatedProperties: false`), fixture messages (to `createSurface`/`updateComponents` format), and type imports (to `@a2ui/web_core/v0_9`).
+- **RISK-002**: `@a2ui/angular` may not be published to npm as a standalone package — it may only be available as a local build from the A2UI repo. If so, use `npm link` or file-based dependency (`"@a2ui/angular": "file:../A2UI/renderers/angular"`) to reference the local build.
+- **RISK-003**: Spartan's `HlmButtonImports` bundle may have transitive dependencies or Tailwind configuration requirements not documented on the Spartan website. Resolve at TASK-004 by inspecting the actual package exports.
+- **RISK-004**: `inputBinding` from `@angular/core` is a relatively new API (Angular 21+). Ensure the workspace uses Angular 21 or later.
+- **ASSUMPTION-001**: `DynamicComponent<Types.CustomNode>` is the correct generic type for Spartan wrappers — Spartan props (`variant`, `size`) don't match any standard A2UI node type.
+- **ASSUMPTION-002**: Spartan button's visual output is fully determined by the `hlmBtn` directive + `variant` + `size` inputs — no additional configuration or global CSS beyond Tailwind is needed.
+- **ASSUMPTION-003**: The `DEFAULT_CATALOG`'s `Text` component renders correctly inside an `HlmButton` wrapper's child slot without style conflicts.
+
+## 8. Related Specifications / Further Reading
+
+- [Design Document](../docs/plans/2026-03-04-hlm-button-adapter-design.md)
+- [A2UI v0.8 Standard Catalog Definition](https://github.com/google/A2UI/blob/main/specification/0_8/json/standard_catalog_definition.json)
+- [A2UI v0.8 Server-to-Client Schema](https://github.com/google/A2UI/blob/main/specification/0_8/json/server_to_client.json)
+- [Rizzcharts Catalog (TS)](https://github.com/google/A2UI/blob/main/samples/client/angular/projects/rizzcharts/src/a2ui-catalog/catalog.ts)
+- [Rizzcharts Catalog (JSON)](https://github.com/google/A2UI/blob/main/samples/agent/adk/rizzcharts/rizzcharts_catalog_definition.json)
+- [Rizzcharts Agent](https://github.com/google/A2UI/blob/main/samples/agent/adk/rizzcharts/agent.py)
+- [Spartan Button Docs](https://www.spartan.ng/components/button)
+- [Adapter Implications Notes](../../personal/A2UI/spartan-adapter-implications.md)
+- [A2UI v0.9 Minimal Catalog (future reference)](https://github.com/google/A2UI/blob/main/specification/v0_9/json/catalogs/minimal/minimal_catalog.json)
