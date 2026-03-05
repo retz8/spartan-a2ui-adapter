@@ -1,0 +1,206 @@
+[
+  {
+    "surfaceUpdate": {
+      "surfaceId": "button-showcase",
+      "components": [
+        {
+          "id": "root",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "btn_default",
+                  "btn_destructive",
+                  "btn_outline",
+                  "btn_secondary",
+                  "btn_ghost",
+                  "btn_link",
+                  "btn_sm",
+                  "btn_lg",
+                  "btn_icon"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "btn_default",
+          "component": {
+            "HlmButton": {
+              "variant": "default",
+              "child": "btn_default_text",
+              "action": { "name": "btn_default_clicked" }
+            }
+          }
+        },
+        {
+          "id": "btn_default_text",
+          "component": {
+            "Text": {
+              "text": { "literalString": "Default" },
+              "usageHint": "body"
+            }
+          }
+        },
+        {
+          "id": "btn_destructive",
+          "component": {
+            "HlmButton": {
+              "variant": "destructive",
+              "child": "btn_destructive_text",
+              "action": { "name": "btn_destructive_clicked" }
+            }
+          }
+        },
+        {
+          "id": "btn_destructive_text",
+          "component": {
+            "Text": {
+              "text": { "literalString": "Destructive" },
+              "usageHint": "body"
+            }
+          }
+        },
+        {
+          "id": "btn_outline",
+          "component": {
+            "HlmButton": {
+              "variant": "outline",
+              "child": "btn_outline_text",
+              "action": { "name": "btn_outline_clicked" }
+            }
+          }
+        },
+        {
+          "id": "btn_outline_text",
+          "component": {
+            "Text": {
+              "text": { "literalString": "Outline" },
+              "usageHint": "body"
+            }
+          }
+        },
+        {
+          "id": "btn_secondary",
+          "component": {
+            "HlmButton": {
+              "variant": "secondary",
+              "child": "btn_secondary_text",
+              "action": { "name": "btn_secondary_clicked" }
+            }
+          }
+        },
+        {
+          "id": "btn_secondary_text",
+          "component": {
+            "Text": {
+              "text": { "literalString": "Secondary" },
+              "usageHint": "body"
+            }
+          }
+        },
+        {
+          "id": "btn_ghost",
+          "component": {
+            "HlmButton": {
+              "variant": "ghost",
+              "child": "btn_ghost_text",
+              "action": { "name": "btn_ghost_clicked" }
+            }
+          }
+        },
+        {
+          "id": "btn_ghost_text",
+          "component": {
+            "Text": {
+              "text": { "literalString": "Ghost" },
+              "usageHint": "body"
+            }
+          }
+        },
+        {
+          "id": "btn_link",
+          "component": {
+            "HlmButton": {
+              "variant": "link",
+              "child": "btn_link_text",
+              "action": { "name": "btn_link_clicked" }
+            }
+          }
+        },
+        {
+          "id": "btn_link_text",
+          "component": {
+            "Text": {
+              "text": { "literalString": "Link" },
+              "usageHint": "body"
+            }
+          }
+        },
+        {
+          "id": "btn_sm",
+          "component": {
+            "HlmButton": {
+              "size": "sm",
+              "child": "btn_sm_text",
+              "action": { "name": "btn_sm_clicked" }
+            }
+          }
+        },
+        {
+          "id": "btn_sm_text",
+          "component": {
+            "Text": {
+              "text": { "literalString": "Size: sm" },
+              "usageHint": "body"
+            }
+          }
+        },
+        {
+          "id": "btn_lg",
+          "component": {
+            "HlmButton": {
+              "size": "lg",
+              "child": "btn_lg_text",
+              "action": { "name": "btn_lg_clicked" }
+            }
+          }
+        },
+        {
+          "id": "btn_lg_text",
+          "component": {
+            "Text": {
+              "text": { "literalString": "Size: lg" },
+              "usageHint": "body"
+            }
+          }
+        },
+        {
+          "id": "btn_icon",
+          "component": {
+            "HlmButton": {
+              "size": "icon",
+              "child": "btn_icon_text",
+              "action": { "name": "btn_icon_clicked" }
+            }
+          }
+        },
+        {
+          "id": "btn_icon_text",
+          "component": {
+            "Text": {
+              "text": { "literalString": "+" },
+              "usageHint": "body"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "beginRendering": {
+      "surfaceId": "button-showcase",
+      "root": "root"
+    }
+  }
+]

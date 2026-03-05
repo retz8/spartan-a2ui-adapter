@@ -1,2 +1,21 @@
-<app-nx-welcome></app-nx-welcome>
-<router-outlet></router-outlet>
+<div class="flex gap-8 p-8 min-h-screen bg-background">
+  <div class="flex-1">
+    <h2 class="text-xl font-semibold mb-4">A2UI Rendered</h2>
+    <a2ui-surface [surfaceId]="surfaceId" [surface]="surface()" />
+  </div>
+  <div class="w-px bg-border"></div>
+  <div class="flex-1">
+    <h2 class="text-xl font-semibold mb-4">Native Spartan</h2>
+    <div class="flex flex-col gap-2 items-start">
+      <button hlmBtn variant="default">Default</button>
+      <button hlmBtn variant="destructive">Destructive</button>
+      <button hlmBtn variant="outline">Outline</button>
+      <button hlmBtn variant="secondary">Secondary</button>
+      <button hlmBtn variant="ghost">Ghost</button>
+      <button hlmBtn variant="link">Link</button>
+      <button hlmBtn size="sm">Size: sm</button>
+      <button hlmBtn size="lg">Size: lg</button>
+      <button hlmBtn size="icon">+</button>
+    </div>
+  </div>
+</div>
