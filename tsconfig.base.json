@@ -26,6 +26,9 @@
       ],
       "@spartan-ng/helm/utils": [
         "libs/ui/utils/src/index.ts"
+      ],
+      "@a2ui/angular": [
+        "../A2UI/renderers/angular/dist/types/a2ui-angular.d.ts"
       ]
     }
   },
