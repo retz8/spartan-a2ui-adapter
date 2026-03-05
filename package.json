@@ -5,8 +5,8 @@
   "scripts": {},
   "private": true,
   "dependencies": {
-    "@a2ui/angular": "file:../A2UI/renderers/angular",
-    "@a2ui/web_core": "file:../A2UI/renderers/web_core",
+    "@a2ui/angular": "0.8.3",
+    "@a2ui/web_core": "0.8.0",
     "@angular-devkit/build-angular": "21.1.1",
     "@angular/cdk": "21.0.0",
     "@angular/common": "21.2.1",
