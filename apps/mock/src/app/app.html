@@ -17,9 +17,9 @@
     <p class="text-destructive text-sm">{{ error() }}</p>
   }
 
-  @if (surface()) {
+  @if (surface() && surfaceId()) {
     <div class="border rounded p-4">
-      <a2ui-surface [surface]="surface()" />
+      <a2ui-surface [surfaceId]="surfaceId()!" [surface]="surface()" />
     </div>
   }
 </div>

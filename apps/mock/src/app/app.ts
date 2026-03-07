@@ -17,6 +17,7 @@ export class App {
 
   protected readonly prompt = signal('');
   protected readonly surface = signal<Types.Surface | null>(null);
+  protected readonly surfaceId = signal<string | null>(null);
   protected readonly loading = signal(false);
   protected readonly error = signal<string | null>(null);
 
@@ -32,8 +33,12 @@ export class App {
       this.processor.processMessages(messages);
 
       const surfaces = this.processor.getSurfaces();
-      const latestSurface = [...surfaces.values()].at(-1) ?? null;
-      this.surface.set(latestSurface);
+      const entries = [...surfaces.entries()];
+      const latest = entries[entries.length - 1];
+      if (latest) {
+        this.surfaceId.set(latest[0]);
+        this.surface.set(latest[1]);
+      }
     } catch (e) {
       this.error.set(e instanceof Error ? e.message : 'Unknown error');
     } finally {
