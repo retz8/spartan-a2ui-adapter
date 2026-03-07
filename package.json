@@ -5,6 +5,7 @@
   "scripts": {},
   "private": true,
   "dependencies": {
+    "@a2a-js/sdk": "0.3.10",
     "@a2ui/angular": "0.8.3",
     "@a2ui/web_core": "0.8.0",
     "@angular-devkit/build-angular": "21.1.1",
