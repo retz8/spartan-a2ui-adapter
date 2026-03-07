@@ -1,0 +1,43 @@
+[
+  {
+    "surfaceUpdate": {
+      "surfaceId": "badge_surface",
+      "components": [
+        {
+          "id": "root",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": ["badge_new"]
+              }
+            }
+          }
+        },
+        {
+          "id": "badge_new",
+          "component": {
+            "HlmBadge": {
+              "variant": "default",
+              "child": "badge_new_text"
+            }
+          }
+        },
+        {
+          "id": "badge_new_text",
+          "component": {
+            "Text": {
+              "text": { "literalString": "New" },
+              "usageHint": "body"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "beginRendering": {
+      "surfaceId": "badge_surface",
+      "root": "root"
+    }
+  }
+]

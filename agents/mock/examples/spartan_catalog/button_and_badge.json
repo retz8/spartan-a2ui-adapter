@@ -1,0 +1,62 @@
+[
+  {
+    "surfaceUpdate": {
+      "surfaceId": "button_badge_surface",
+      "components": [
+        {
+          "id": "root",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": ["btn_confirm", "badge_status"]
+              }
+            }
+          }
+        },
+        {
+          "id": "btn_confirm",
+          "component": {
+            "HlmButton": {
+              "variant": "default",
+              "child": "btn_confirm_text",
+              "action": { "name": "btn_confirm_clicked" }
+            }
+          }
+        },
+        {
+          "id": "btn_confirm_text",
+          "component": {
+            "Text": {
+              "text": { "literalString": "Confirm" },
+              "usageHint": "body"
+            }
+          }
+        },
+        {
+          "id": "badge_status",
+          "component": {
+            "HlmBadge": {
+              "variant": "secondary",
+              "child": "badge_status_text"
+            }
+          }
+        },
+        {
+          "id": "badge_status_text",
+          "component": {
+            "Text": {
+              "text": { "literalString": "Pending" },
+              "usageHint": "body"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "beginRendering": {
+      "surfaceId": "button_badge_surface",
+      "root": "root"
+    }
+  }
+]

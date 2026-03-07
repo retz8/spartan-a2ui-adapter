@@ -1,0 +1,44 @@
+[
+  {
+    "surfaceUpdate": {
+      "surfaceId": "button_surface",
+      "components": [
+        {
+          "id": "root",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": ["btn_submit"]
+              }
+            }
+          }
+        },
+        {
+          "id": "btn_submit",
+          "component": {
+            "HlmButton": {
+              "variant": "default",
+              "child": "btn_submit_text",
+              "action": { "name": "btn_submit_clicked" }
+            }
+          }
+        },
+        {
+          "id": "btn_submit_text",
+          "component": {
+            "Text": {
+              "text": { "literalString": "Submit" },
+              "usageHint": "body"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "beginRendering": {
+      "surfaceId": "button_surface",
+      "root": "root"
+    }
+  }
+]
