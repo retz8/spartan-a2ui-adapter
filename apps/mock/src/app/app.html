@@ -1,21 +1,25 @@
-<div class="flex gap-8 p-8 min-h-screen bg-background">
-  <div class="flex-1">
-    <h2 class="text-xl font-semibold mb-4">A2UI Rendered</h2>
-    <a2ui-surface [surfaceId]="surfaceId" [surface]="surface()" />
+<div class="flex flex-col gap-4 p-8 min-h-screen bg-background">
+  <h1 class="text-2xl font-bold">Spartan A2UI Demo</h1>
+
+  <div class="flex gap-2">
+    <input
+      class="flex-1 border rounded px-3 py-2 text-sm bg-background"
+      placeholder='Try "show me a button" or "show me a button and badge"'
+      [(ngModel)]="prompt"
+      (keydown.enter)="send()"
+    />
+    <button hlmBtn [disabled]="loading()" (click)="send()">
+      {{ loading() ? 'Thinking...' : 'Send' }}
+    </button>
   </div>
-  <div class="w-px bg-border"></div>
-  <div class="flex-1">
-    <h2 class="text-xl font-semibold mb-4">Native Spartan</h2>
-    <div class="flex flex-col gap-2 items-start">
-      <button hlmBtn variant="default">Default</button>
-      <button hlmBtn variant="destructive">Destructive</button>
-      <button hlmBtn variant="outline">Outline</button>
-      <button hlmBtn variant="secondary">Secondary</button>
-      <button hlmBtn variant="ghost">Ghost</button>
-      <button hlmBtn variant="link">Link</button>
-      <button hlmBtn size="sm">Size: sm</button>
-      <button hlmBtn size="lg">Size: lg</button>
-      <button hlmBtn size="icon">+</button>
+
+  @if (error()) {
+    <p class="text-destructive text-sm">{{ error() }}</p>
+  }
+
+  @if (surface()) {
+    <div class="border rounded p-4">
+      <a2ui-surface [surface]="surface()" />
     </div>
-  </div>
+  }
 </div>
