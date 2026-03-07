@@ -13,4 +13,13 @@ export const SPARTAN_CATALOG = {
       inputBinding('size', () => ('size' in properties && properties['size']) || 'default'),
     ],
   },
+  HlmBadge: {
+    type: () =>
+      import('./components/hlm-badge/hlm-badge-wrapper.component').then(
+        (r) => r.HlmBadgeWrapperComponent,
+      ),
+    bindings: ({ properties }) => [
+      inputBinding('variant', () => ('variant' in properties && properties['variant']) || 'default'),
+    ],
+  },
 } as Catalog;
