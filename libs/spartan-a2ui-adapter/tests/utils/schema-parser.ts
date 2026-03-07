@@ -41,6 +41,22 @@ export function getInputBindingNames(catalogTsPath: string, componentName: strin
     });
 }
 
-export function getInputDeclarationNames(_wrapperPath: string): string[] {
-  throw new Error('not implemented');
+export function getInputDeclarationNames(wrapperPath: string): string[] {
+  const project = new Project({ addFilesFromTsConfig: false });
+  const sourceFile = project.addSourceFileAtPath(wrapperPath);
+
+  // Find: readonly propName = input<Type>(defaultValue)
+  // In the TS AST, `input<string>(...)` is a CallExpression where
+  // getExpression().getText() === 'input' (type args are NOT part of expression text)
+  return sourceFile
+    .getDescendantsOfKind(SyntaxKind.PropertyDeclaration)
+    .filter((prop) => {
+      const initializer = prop.getInitializer();
+      if (!initializer || initializer.getKind() !== SyntaxKind.CallExpression) return false;
+      return initializer
+        .asKindOrThrow(SyntaxKind.CallExpression)
+        .getExpression()
+        .getText() === 'input';
+    })
+    .map((prop) => prop.getName());
 }
