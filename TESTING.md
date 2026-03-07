@@ -4,6 +4,8 @@
 
 Located in `libs/spartan-a2ui-adapter/tests/schema-parity.spec.ts`.
 
+Each adapter component is described in three places: the JSON schema (what the agent sees), the TypeScript bindings (how properties are wired at runtime), and the wrapper component (how they are declared as Angular inputs). These three must always agree — a property missing from any one layer means the agent can describe it but the UI won't render it correctly, or vice versa. Schema parity tests catch that gap at the source level, without needing to run the Angular app.
+
 These are static analysis tests that verify the three layers of each adapter component stay in sync:
 
 | Layer | File |
