@@ -7,13 +7,23 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
   selector: 'a2ui-hlm-button',
   imports: [HlmButtonImports, Renderer],
   template: `
-    <button hlmBtn [variant]="$any(variant())" [size]="$any(size())" [disabled]="disabled()" (click)="handleClick()">
-      <ng-container
-        a2ui-renderer
-        [surfaceId]="surfaceId()!"
-        [component]="$any(component().properties['child'])"
-      />
-    </button>
+    @if (href()) {
+      <a hlmBtn [variant]="$any(variant())" [size]="$any(size())" [href]="href()" (click)="handleClick()">
+        <ng-container
+          a2ui-renderer
+          [surfaceId]="surfaceId()!"
+          [component]="$any(component().properties['child'])"
+        />
+      </a>
+    } @else {
+      <button hlmBtn [variant]="$any(variant())" [size]="$any(size())" [disabled]="disabled()" (click)="handleClick()">
+        <ng-container
+          a2ui-renderer
+          [surfaceId]="surfaceId()!"
+          [component]="$any(component().properties['child'])"
+        />
+      </button>
+    }
   `,
   styles: [
     `
@@ -29,6 +39,7 @@ export class HlmButtonWrapperComponent extends DynamicComponent<Types.CustomNode
   readonly variant = input<string>('default');
   readonly size = input<string>('default');
   readonly disabled = input<boolean>(false);
+  readonly href = input<string | undefined>(undefined);
 
   handleClick(): void {
     const action = this.component().properties['action'] as unknown as Types.Action | undefined;
