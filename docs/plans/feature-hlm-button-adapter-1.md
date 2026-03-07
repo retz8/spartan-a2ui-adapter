@@ -4,13 +4,13 @@ version: 1.2
 date_created: 2026-03-04
 last_updated: 2026-03-04
 owner: Jioh In
-status: Planned
+status: Ready for Review
 tags: [feature, adapter, a2ui, spartan, angular]
 ---
 
 # Introduction
 
-![Status: Planned](https://img.shields.io/badge/status-Planned-blue)
+![Status: Ready for Review](https://img.shields.io/badge/status-Ready%20for%20Review-yellow)
 
 Implement the first A2UI catalog adapter for Spartan UI, scoped to a single component: `HlmButton`. This plan covers the full vertical slice — Nx workspace scaffolding, the adapter library (wrapper component + catalog object + catalog ID), the agent-side JSON Schema catalog, and a fixture-driven mock app that renders Spartan buttons via A2UI side-by-side with native Spartan buttons for visual parity verification.
 
