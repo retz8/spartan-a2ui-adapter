@@ -12,24 +12,30 @@ An A2UI catalog adapter for Spartan UI — maps Spartan's Angular component libr
 
 ```
 spartan-a2ui-adapter/
-├── libs/
-│   ├── spartan-a2ui-adapter/       # publishable adapter library
-│   │   └── src/lib/
-│   │       ├── catalog.ts          # SPARTAN_CATALOG (renderer-side)
-│   │       ├── catalog-id.ts       # SPARTAN_CATALOG_ID
-│   │       └── components/
-│   │           └── hlm-button/     # wrapper components per Spartan component
-│   └── ui/
-│       ├── button/                 # HlmButton helm (Spartan styling directive)
-│       └── utils/                  # shared Spartan utilities
+├── agents/
+│   └── mock/                       # Google ADK Python agent (A2A server)
+│       ├── spartan_mock_agent/     # agent, executor, entrypoint
+│       └── examples/spartan_catalog/  # few-shot A2UI JSON payloads
 ├── apps/
-│   └── mock/                       # dev-only visual comparison app
+│   └── mock/                       # Angular client (A2A-connected chat UI)
 │       └── src/app/
-│           ├── fixtures/           # hardcoded A2UI JSON payloads
+│           ├── a2a.service.ts      # A2A JSON-RPC client
+│           ├── fixtures/           # reference A2UI JSON payloads (unused at runtime)
 │           └── theme.ts            # minimal theme for default catalog components
-└── catalogs/
-    └── spartan/v0.8.0/
-        └── catalog.json            # agent-side JSON Schema (versioned)
+└── libs/
+    ├── spartan-a2ui-adapter/       # publishable adapter library
+    │   ├── catalogs/v0.8.0/
+    │   │   └── catalog.json        # agent-side JSON Schema (published with npm package)
+    │   └── src/lib/
+    │       ├── catalog.ts          # SPARTAN_CATALOG (renderer-side)
+    │       ├── catalog-id.ts       # SPARTAN_CATALOG_ID
+    │       └── components/
+    │           ├── hlm-button/     # HlmButtonWrapperComponent
+    │           └── hlm-badge/      # HlmBadgeWrapperComponent
+    └── ui/
+        ├── button/                 # HlmButton helm (Spartan styling directive)
+        ├── badge/                  # HlmBadge helm (Spartan styling directive)
+        └── utils/                  # shared Spartan utilities
 ```
 
 ## References

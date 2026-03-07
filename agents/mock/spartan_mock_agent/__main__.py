@@ -20,10 +20,20 @@ from starlette.middleware.cors import CORSMiddleware
 
 try:
     from .agent import SpartanMockAgent
-    from .agent_executor import SpartanMockAgentExecutor, get_a2ui_enabled, get_a2ui_catalog, get_a2ui_examples
+    from .agent_executor import (
+        SpartanMockAgentExecutor,
+        get_a2ui_enabled,
+        get_a2ui_catalog,
+        get_a2ui_examples,
+    )
 except ImportError:
     from agent import SpartanMockAgent
-    from agent_executor import SpartanMockAgentExecutor, get_a2ui_enabled, get_a2ui_catalog, get_a2ui_examples
+    from agent_executor import (
+        SpartanMockAgentExecutor,
+        get_a2ui_enabled,
+        get_a2ui_catalog,
+        get_a2ui_examples,
+    )
 
 load_dotenv()
 logging.basicConfig(level=logging.INFO)
@@ -55,9 +65,7 @@ def main(host, port):
     try:
         if not os.getenv("GOOGLE_GENAI_USE_VERTEXAI") == "TRUE":
             if not os.getenv("GEMINI_API_KEY"):
-                raise MissingAPIKeyError(
-                    "GEMINI_API_KEY environment variable not set."
-                )
+                raise MissingAPIKeyError("GEMINI_API_KEY environment variable not set.")
 
         if not CATALOG_PATH.exists():
             raise FileNotFoundError(
@@ -116,7 +124,10 @@ def main(host, port):
         app = server.build()
         app.add_middleware(
             CORSMiddleware,
-            allow_origins=["http://localhost:4200"],
+            allow_origins=[
+                "http://localhost:4200",
+                "https://vnw20xbg-4200.asse.devtunnels.ms",
+            ],
             allow_credentials=True,
             allow_methods=["*"],
             allow_headers=["*"],
