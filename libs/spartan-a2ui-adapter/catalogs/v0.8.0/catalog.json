@@ -848,7 +848,7 @@
             "name"
           ]
         }
-      },
+      }
     },
     "HlmBadge": {
       "type": "object",
