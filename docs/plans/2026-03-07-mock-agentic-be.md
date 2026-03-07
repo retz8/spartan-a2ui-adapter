@@ -369,10 +369,10 @@ url = "https://pypi.org/simple"
 default = true
 
 [tool.uv.sources]
-a2ui-agent = { path = "../../../../A2UI/agent_sdks/python", editable = true }
+a2ui-agent = { path = "../../../A2UI/agent_sdks/python", editable = true }
 ```
 
-> **Note:** `a2ui-agent` path is relative to `agents/mock/`. Verify the relative path to `A2UI/agent_sdks/python` from `agents/mock/` matches your local directory structure: `../../../../A2UI/agent_sdks/python` → `spartan-a2ui-adapter/../../A2UI/agent_sdks/python` → assumes `A2UI/` and `spartan-a2ui-adapter/` are siblings under `future-of-sw/`.
+> **Note:** `a2ui-agent` path is relative to `agents/mock/`. From `agents/mock/`, three levels up (`../../../`) reaches `future-of-sw/`, so the path is `../../../A2UI/agent_sdks/python`. This assumes `A2UI/` and `spartan-a2ui-adapter/` are siblings under `future-of-sw/`.
 
 **Step 3: Create `.env.example`**
 

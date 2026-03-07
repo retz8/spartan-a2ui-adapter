@@ -848,7 +848,7 @@
       "properties": {
         "variant": {
           "type": "string",
-          "enum": ["default", "secondary", "destructive", "outline"],
+          "enum": ["default", "secondary", "destructive", "outline", "ghost", "link"],
           "description": "Visual style of the badge."
         },
         "child": {

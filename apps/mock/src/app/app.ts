@@ -30,6 +30,7 @@ export class App {
 
     try {
       const messages = await this.a2aService.sendMessage(text);
+      this.prompt.set('');
       this.processor.processMessages(messages);
 
       const surfaces = this.processor.getSurfaces();
