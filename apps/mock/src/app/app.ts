@@ -60,7 +60,7 @@ export class App implements OnInit {
     const latest = entries[entries.length - 1];
     if (latest) {
       this.surfaceId.set(latest[0]);
-      this.surface.set(latest[1]);
+      this.surface.set({ ...latest[1] });
     }
   }
 }
