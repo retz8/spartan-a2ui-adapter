@@ -837,9 +837,6 @@
           ]
         }
       },
-      "required": [
-        "child"
-      ]
     },
     "HlmBadge": {
       "type": "object",
