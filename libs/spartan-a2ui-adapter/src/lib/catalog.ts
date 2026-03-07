@@ -11,6 +11,7 @@ export const SPARTAN_CATALOG = {
     bindings: ({ properties }) => [
       inputBinding('variant', () => ('variant' in properties && properties['variant']) || 'default'),
       inputBinding('size', () => ('size' in properties && properties['size']) || 'default'),
+      inputBinding('disabled', () => ('disabled' in properties && !!properties['disabled']) || false),
     ],
   },
   HlmBadge: {
