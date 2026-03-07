@@ -77,10 +77,65 @@ https://github.com/retz8/spartan-a2ui-adapter/blob/main/libs/spartan-a2ui-adapte
 
 ## Components
 
-| Component | Variants |
-|---|---|
-| `HlmButton` | `default`, `destructive`, `outline`, `secondary`, `ghost`, `link` |
-| `HlmBadge` | `default`, `secondary`, `destructive`, `outline`, `ghost`, `link` |
+Supported components from the [Spartan UI](https://spartan.ng/components) library:
+
+- [ ] Accordion
+- [ ] Alert
+- [ ] Alert Dialog
+- [ ] Aspect Ratio
+- [ ] Autocomplete
+- [ ] Avatar
+- [x] Badge
+- [ ] Breadcrumb
+- [x] Button
+- [ ] Button Group
+- [ ] Calendar
+- [ ] Card
+- [ ] Carousel
+- [ ] Checkbox
+- [ ] Collapsible
+- [ ] Combobox
+- [ ] Command
+- [ ] Context Menu
+- [ ] Data Table
+- [ ] Date Picker
+- [ ] Dialog
+- [ ] Dropdown Menu
+- [ ] Empty
+- [ ] Field
+- [ ] Form Field
+- [ ] Hover Card
+- [ ] Icon
+- [ ] Input
+- [ ] Input Group
+- [ ] Input OTP
+- [ ] Item
+- [ ] Kbd
+- [ ] Label
+- [ ] Menubar
+- [ ] Native Select
+- [ ] Navigation Menu
+- [ ] Pagination
+- [ ] Popover
+- [ ] Progress
+- [ ] Radio Group
+- [ ] Resizable
+- [ ] Scroll Area
+- [ ] Select
+- [ ] Separator
+- [ ] Sheet
+- [ ] Sidebar
+- [ ] Skeleton
+- [ ] Slider
+- [ ] Sonner (Toast)
+- [ ] Spinner
+- [ ] Switch
+- [ ] Table
+- [ ] Tabs
+- [ ] Textarea
+- [ ] Toggle
+- [ ] Toggle Group
+- [ ] Tooltip
 
 ## Build
 

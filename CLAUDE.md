@@ -5,6 +5,7 @@ Covers: task instructions, project overview, and references.
 ## Task Instructions [MUST READ]
 
 - **A2UI-related tasks** (catalog format, component mappings, protocol types, renderer behavior): MUST read `a2ui-v0.8-spec.md` from memory before proceeding. If you think you *might* need A2UI spec knowledge, read it proactively. The A2UI source lives at `../A2UI/` relative to this project.
+- **New Spartan UI component mapping** or **reviewing a Spartan UI catalog mapping implementation**: MUST read `docs/spartan-components/<component-name>.md` before proceeding. This contains the authoritative reference extracted from the official Spartan UI docs.
 - **Nx monorepo setup tasks**: refer to `docs/nx-guidelines.md`.
 
 ## Project Overview
