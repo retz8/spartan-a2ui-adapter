@@ -789,6 +789,10 @@
             "icon-lg"
           ]
         },
+        "disabled": {
+          "type": "boolean",
+          "description": "Whether the button is disabled. Disabled buttons are non-interactive and visually dimmed."
+        },
         "child": {
           "type": "string",
           "description": "The ID of the component to display in the button, typically a Text component."
