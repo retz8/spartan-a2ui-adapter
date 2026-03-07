@@ -2,6 +2,18 @@
 
 An [A2UI](https://github.com/google/a2ui) catalog adapter for [Spartan UI](https://spartan.ng) — maps Spartan's Angular component library to the A2UI protocol so agents can reason about and compose Angular UIs.
 
+## Folder structure
+
+```
+spartan-a2ui-adapter/
+├── agents/         # Agentic backends (one folder per named sample)
+├── apps/           # Angular client apps (one folder per named sample)
+├── libs/
+│   ├── spartan-a2ui-adapter/   # Publishable adapter library
+│   └── ui/                     # Spartan UI helm components
+└── docs/           # Architecture notes, component references, plans
+```
+
 ## What's in this repo
 
 - `libs/spartan-a2ui-adapter/` — the adapter library (`@spartan-a2ui-adapter`)
