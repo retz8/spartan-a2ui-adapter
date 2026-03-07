@@ -26,6 +26,9 @@
       ],
       "@spartan-ng/helm/utils": [
         "libs/ui/utils/src/index.ts"
+      ],
+      "@spartan-ng/helm/badge": [
+        "libs/ui/badge/src/index.ts"
       ]
     }
   },
