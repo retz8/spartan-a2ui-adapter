@@ -24,9 +24,7 @@
     "src/**/*.test.jsx",
     "src/**/*.spec.jsx",
     "src/**/*.d.ts",
-    "tests/**/*.spec.ts",
-    "tests/**/*.test.ts",
-    "tests/**/*.d.ts"
+    "tests/**/*.ts"
   ],
   "files": ["src/test-setup.ts"]
 }
