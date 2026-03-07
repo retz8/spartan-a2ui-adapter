@@ -777,12 +777,16 @@
         },
         "size": {
           "type": "string",
-          "description": "Size of the button.",
+          "description": "Size of the button. default/xs/sm/lg for text buttons; icon/icon-xs/icon-sm/icon-lg for square icon-only buttons.",
           "enum": [
             "default",
+            "xs",
             "sm",
             "lg",
-            "icon"
+            "icon",
+            "icon-xs",
+            "icon-sm",
+            "icon-lg"
           ]
         },
         "child": {
