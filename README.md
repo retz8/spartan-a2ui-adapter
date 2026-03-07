@@ -5,17 +5,39 @@ An [A2UI](https://github.com/google/a2ui) catalog adapter for [Spartan UI](https
 ## What's in this repo
 
 - `libs/spartan-a2ui-adapter/` — the adapter library (`@spartan-a2ui-adapter`)
-- `catalogs/spartan/v0.8.0/catalog.json` — agent-side JSON Schema catalog
-- `apps/mock/` — fixture-driven mock app for visual parity verification
+- `libs/spartan-a2ui-adapter/catalogs/v0.8.0/catalog.json` — agent-side JSON Schema catalog (published with the npm package)
+- `agents/mock/` — Google ADK Python agent that generates A2UI responses from natural language prompts
+- `apps/mock/` — Angular client that sends prompts to the agent via A2A and renders the live response
 
 ## Quick start
 
+### 1. Build the adapter library
+
 ```bash
 npm install
+npx nx build spartan-a2ui-adapter
+```
+
+### 2. Start the agent
+
+```bash
+cd agents/mock
+cp .env.example .env
+# Edit .env and set GEMINI_API_KEY=your_key_here
+
+uv sync
+uv run python -m spartan_mock_agent
+```
+
+### 3. Start the Angular app
+
+In a separate terminal:
+
+```bash
 npx nx serve mock
 ```
 
-Open `http://localhost:4200` to see A2UI-rendered Spartan buttons side-by-side with native Spartan buttons.
+Open `http://localhost:4200`, type a prompt like `show me a button and badge`, and see Spartan UI components rendered live from the agent.
 
 ## Library usage
 
@@ -33,8 +55,15 @@ export const appConfig: ApplicationConfig = {
 Pass `SPARTAN_CATALOG_ID` to your agent so it loads the right catalog:
 
 ```
-https://github.com/retz8/spartan-a2ui-adapter/blob/main/catalogs/spartan/v0.8.0/catalog.json
+https://github.com/retz8/spartan-a2ui-adapter/blob/main/libs/spartan-a2ui-adapter/catalogs/v0.8.0/catalog.json
 ```
+
+## Components
+
+| Component | Variants |
+|---|---|
+| `HlmButton` | `default`, `destructive`, `outline`, `secondary`, `ghost`, `link` |
+| `HlmBadge` | `default`, `secondary`, `destructive`, `outline`, `ghost`, `link` |
 
 ## Build
 
@@ -49,6 +78,7 @@ npx nx build mock
 npx nx run-many --targets=build
 ```
 
-## Design doc
+## Design docs
 
-See [`docs/plans/2026-03-04-hlm-button-adapter-design.md`](docs/plans/2026-03-04-hlm-button-adapter-design.md).
+- [Mock agentic backend design](docs/plans/2026-03-07-mock-agentic-be-design.md)
+- [HlmButton adapter design](docs/plans/2026-03-04-hlm-button-adapter-design.md)

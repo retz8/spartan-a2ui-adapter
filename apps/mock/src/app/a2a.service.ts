@@ -3,7 +3,8 @@ import { SendMessageSuccessResponse, Part, Artifact, Task, Message } from '@a2a-
 import * as Types from '@a2ui/web_core/types/types';
 import { SPARTAN_CATALOG_ID } from '@spartan-a2ui-adapter';
 
-const AGENT_URL = 'http://localhost:10002';
+const AGENT_URL = 'https://vnw20xbg-10002.asse.devtunnels.ms';
+const A2UI_EXTENSION_URI = 'https://a2ui.org/a2a-extension/a2ui/v0.8';
 
 @Injectable({ providedIn: 'root' })
 export class A2aService {
@@ -22,6 +23,7 @@ export class A2aService {
             messageId: crypto.randomUUID(),
             role: 'user',
             parts: [{ kind: 'text', text }],
+            extensions: [A2UI_EXTENSION_URI],
             metadata: {
               a2uiClientCapabilities: {
                 supportedCatalogIds: [SPARTAN_CATALOG_ID],
