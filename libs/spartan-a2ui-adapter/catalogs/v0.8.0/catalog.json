@@ -840,6 +840,23 @@
       "required": [
         "child"
       ]
+    },
+    "HlmBadge": {
+      "type": "object",
+      "description": "A styled badge label using Spartan UI. Used to display a status, count, or category.",
+      "additionalProperties": false,
+      "properties": {
+        "variant": {
+          "type": "string",
+          "enum": ["default", "secondary", "destructive", "outline"],
+          "description": "Visual style of the badge."
+        },
+        "child": {
+          "type": "string",
+          "description": "The ID of the component to display inside the badge, typically a Text component."
+        }
+      },
+      "required": ["child"]
     }
   }
 }
