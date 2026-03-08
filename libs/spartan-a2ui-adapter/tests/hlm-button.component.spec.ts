@@ -48,4 +48,20 @@ describe('HlmButtonWrapperComponent', () => {
     const fixture = createFixture();
     expect(fixture.componentInstance).toBeTruthy();
   });
+
+  it('renders a <button> by default (no href)', () => {
+    const fixture = createFixture();
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.querySelector('button')).not.toBeNull();
+    expect(el.querySelector('a')).toBeNull();
+  });
+
+  it('renders an <a> when href is provided', () => {
+    const fixture = createFixture({ href: 'https://example.com' });
+    const el = fixture.nativeElement as HTMLElement;
+    const anchor = el.querySelector('a');
+    expect(anchor).not.toBeNull();
+    expect(anchor!.getAttribute('href')).toBe('https://example.com');
+    expect(el.querySelector('button')).toBeNull();
+  });
 });
