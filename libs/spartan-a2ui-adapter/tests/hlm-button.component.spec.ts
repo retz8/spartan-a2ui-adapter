@@ -64,4 +64,10 @@ describe('HlmButtonWrapperComponent', () => {
     expect(anchor!.getAttribute('href')).toBe('https://example.com');
     expect(el.querySelector('button')).toBeNull();
   });
+
+  it('forwards disabled to the <button> element', () => {
+    const fixture = createFixture({ disabled: true });
+    const button = (fixture.nativeElement as HTMLElement).querySelector('button')!;
+    expect(button.disabled).toBe(true);
+  });
 });
