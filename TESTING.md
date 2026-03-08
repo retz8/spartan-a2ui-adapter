@@ -61,7 +61,7 @@ npx nx test spartan-a2ui-adapter --testNamePattern="HlmButton"
 
 Located in `libs/spartan-a2ui-adapter/tests/<name>.component.spec.ts` — one file per component.
 
-Schema parity tests prove the three layers are in sync. These tests prove the wrapper actually behaves correctly at runtime — the right HTML element is rendered, inputs flow through to the DOM, and conditional logic works. A passing schema parity test with a failing component test would mean the property is wired correctly at the binding layer but the Angular template or component logic has a bug (e.g. using `[attr.disabled]` instead of `[disabled]`).
+These tests prove the wrapper actually behaves correctly at runtime — the right HTML element is rendered, inputs flow through to the DOM, and conditional logic works. A passing schema parity test with a failing component test would mean the property is wired correctly at the binding layer but the Angular template or component logic has a bug (e.g. using `[attr.disabled]` instead of `[disabled]`).
 
 These are Angular TestBed tests that run in a jsdom environment via `@analogjs/vitest-angular`.
 
