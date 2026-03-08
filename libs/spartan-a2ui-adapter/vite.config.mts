@@ -20,6 +20,11 @@ export default defineConfig(() => ({
     include: ['{src,tests}/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     setupFiles: ['src/test-setup.ts'],
     reporters: ['default'],
+    server: {
+      deps: {
+        inline: ['@a2ui/angular', '@a2ui/lit', '@a2ui/web_core'],
+      },
+    },
     coverage: {
       reportsDirectory: '../../coverage/libs/spartan-a2ui-adapter',
       provider: 'v8' as const,
