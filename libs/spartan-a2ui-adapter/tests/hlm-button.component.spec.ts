@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { provideA2UI, type Catalog, type Theme } from '@a2ui/angular';
-import { describe, it, beforeEach, expect } from 'vitest';
+import { provideA2UI, DynamicComponent, type Catalog, type Theme } from '@a2ui/angular';
+import { describe, it, beforeEach, expect, vi } from 'vitest';
 import { HlmButtonWrapperComponent } from '../src/lib/components/hlm-button/hlm-button-wrapper.component';
 
 // Minimal child node stub — Renderer reads `.type` from this node.
@@ -81,5 +81,29 @@ describe('HlmButtonWrapperComponent', () => {
     const fixture = createFixture({ size: 'sm' });
     const button = (fixture.nativeElement as HTMLElement).querySelector('button')!;
     expect(button.classList.contains('h-8')).toBe(true);
+  });
+
+  it('calls sendAction when button is clicked with an action property', () => {
+    const mockAction = { type: 'event', name: 'click' };
+    const spy = vi.spyOn(DynamicComponent.prototype as any, 'sendAction').mockResolvedValue([]);
+
+    const fixture = createFixture({ properties: { action: mockAction } });
+    const button = (fixture.nativeElement as HTMLElement).querySelector('button')!;
+    button.click();
+
+    expect(spy).toHaveBeenCalledOnce();
+    expect(spy).toHaveBeenCalledWith(mockAction);
+    spy.mockRestore();
+  });
+
+  it('does not call sendAction when button is clicked without an action property', () => {
+    const spy = vi.spyOn(DynamicComponent.prototype as any, 'sendAction').mockResolvedValue([]);
+
+    const fixture = createFixture();
+    const button = (fixture.nativeElement as HTMLElement).querySelector('button')!;
+    button.click();
+
+    expect(spy).not.toHaveBeenCalled();
+    spy.mockRestore();
   });
 });
