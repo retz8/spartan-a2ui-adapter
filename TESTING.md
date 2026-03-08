@@ -38,12 +38,79 @@ Current allowlists:
 ### Running
 
 ```bash
+# All tests
 npx nx test spartan-a2ui-adapter
+
+# Schema parity tests only
+npx nx test spartan-a2ui-adapter --testPathPattern="schema-parity"
+
+# One component only (e.g. HlmButton)
+npx nx test spartan-a2ui-adapter --testNamePattern="HlmButton"
 ```
 
 ### Coverage
 
 | Component | Parity test |
+|---|---|
+| `HlmButton` | Yes |
+| `HlmBadge` | Planned |
+
+---
+
+## Angular Component Tests (Wrapper Behavior)
+
+Located in `libs/spartan-a2ui-adapter/tests/<name>.component.spec.ts` — one file per component.
+
+Schema parity tests prove the three layers are in sync. These tests prove the wrapper actually behaves correctly at runtime — the right HTML element is rendered, inputs flow through to the DOM, and conditional logic works. A passing schema parity test with a failing component test would mean the property is wired correctly at the binding layer but the Angular template or component logic has a bug (e.g. using `[attr.disabled]` instead of `[disabled]`).
+
+These are Angular TestBed tests that run in a jsdom environment via `@analogjs/vitest-angular`.
+
+### How it works
+
+Each test:
+1. Configures `TestBed` with `provideA2UI()` (satisfies the `Catalog` and `Theme` tokens that `Renderer` needs)
+2. Creates the component via a shared `createFixture()` helper that sets the required base-class signal inputs (`surfaceId`, `weight`, `component`)
+3. Queries the rendered DOM and asserts on element tag, attributes, or CSS classes
+
+### Test cases per component
+
+**HlmButton** (`tests/hlm-button.component.spec.ts`):
+
+| Test | Input | Assertion |
+|---|---|---|
+| Default renders `<button>` | no `href` | `querySelector('button')` not null |
+| With href renders `<a>` | `href = 'https://...'` | `querySelector('a[href]')` not null |
+| Disabled forwarded | `disabled = true` | `button.disabled === true` |
+| Variant class applied | `variant = 'destructive'` | element has `bg-destructive` class |
+| Size class applied | `size = 'sm'` | element has `h-8` class |
+| Click with action calls `sendAction` | `action` in properties | spy on `DynamicComponent.prototype.sendAction` called once |
+| Click without action is a no-op | no `action` | spy not called |
+
+### Running
+
+```bash
+# All tests
+npx nx test spartan-a2ui-adapter
+
+# Component tests only
+npx nx test spartan-a2ui-adapter --testPathPattern="component.spec"
+
+# One component only (e.g. HlmButton — matches both schema parity and component tests)
+npx nx test spartan-a2ui-adapter --testNamePattern="HlmButton"
+
+# Watch mode
+npx nx test spartan-a2ui-adapter --watch
+```
+
+### Naming convention
+
+Describe blocks must contain the component name so `--testNamePattern` filtering works:
+- Schema parity: `describe('HlmFoo schema parity', ...)`
+- Component behavior: `describe('HlmFooWrapperComponent', ...)`
+
+### Coverage
+
+| Component | Component test |
 |---|---|
 | `HlmButton` | Yes |
 | `HlmBadge` | Planned |
