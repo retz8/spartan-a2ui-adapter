@@ -70,4 +70,16 @@ describe('HlmButtonWrapperComponent', () => {
     const button = (fixture.nativeElement as HTMLElement).querySelector('button')!;
     expect(button.disabled).toBe(true);
   });
+
+  it('applies destructive variant classes', () => {
+    const fixture = createFixture({ variant: 'destructive' });
+    const button = (fixture.nativeElement as HTMLElement).querySelector('button')!;
+    expect(button.classList.contains('bg-destructive')).toBe(true);
+  });
+
+  it('applies sm size classes', () => {
+    const fixture = createFixture({ size: 'sm' });
+    const button = (fixture.nativeElement as HTMLElement).querySelector('button')!;
+    expect(button.classList.contains('h-8')).toBe(true);
+  });
 });
