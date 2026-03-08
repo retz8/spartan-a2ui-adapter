@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { provideA2UI, DynamicComponent, type Catalog, type Theme } from '@a2ui/angular';
-import { describe, it, beforeEach, expect, vi } from 'vitest';
+import { describe, it, beforeEach, afterEach, expect, vi } from 'vitest';
 import { HlmButtonWrapperComponent } from '../src/lib/components/hlm-button/hlm-button-wrapper.component';
 
 // Minimal child node stub — Renderer reads `.type` from this node.
@@ -43,6 +43,8 @@ describe('HlmButtonWrapperComponent', () => {
       ],
     });
   });
+
+  afterEach(() => vi.restoreAllMocks());
 
   it('should create', () => {
     const fixture = createFixture();
@@ -93,7 +95,6 @@ describe('HlmButtonWrapperComponent', () => {
 
     expect(spy).toHaveBeenCalledOnce();
     expect(spy).toHaveBeenCalledWith(mockAction);
-    spy.mockRestore();
   });
 
   it('does not call sendAction when button is clicked without an action property', () => {
@@ -104,6 +105,5 @@ describe('HlmButtonWrapperComponent', () => {
     button.click();
 
     expect(spy).not.toHaveBeenCalled();
-    spy.mockRestore();
   });
 });
