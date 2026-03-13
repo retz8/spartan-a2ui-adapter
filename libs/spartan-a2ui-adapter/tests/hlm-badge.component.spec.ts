@@ -6,7 +6,7 @@ import { HlmBadgeWrapperComponent } from '../src/lib/components/hlm-badge/hlm-ba
 const STUB_CHILD = { id: 'stub-child', type: 'Text', properties: { text: '' } };
 
 function makeComponent(properties: Record<string, unknown> = {}) {
-  return { type: 'HlmBadge', properties: { child: STUB_CHILD, ...properties } };
+  return { type: 'Badge', properties: { child: STUB_CHILD, ...properties } };
 }
 
 function createFixture(overrides: { variant?: string } = {}) {

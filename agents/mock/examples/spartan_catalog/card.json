@@ -43,7 +43,7 @@
         {
           "id": "card_badge",
           "component": {
-            "HlmBadge": {
+            "Badge": {
               "variant": "secondary",
               "child": "card_badge_text"
             }

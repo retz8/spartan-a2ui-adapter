@@ -9,7 +9,7 @@ const STUB_CHILD = { id: 'stub-child', type: 'Text', properties: { text: '' } };
 
 // Minimal stub for the required `component()` signal input.
 function makeComponent(properties: Record<string, unknown> = {}) {
-  return { type: 'HlmButton', properties: { child: STUB_CHILD, ...properties } };
+  return { type: 'Button', properties: { child: STUB_CHILD, ...properties } };
 }
 
 // Shared factory: creates the component with required base-class inputs pre-set.

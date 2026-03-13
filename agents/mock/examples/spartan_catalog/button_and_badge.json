@@ -16,7 +16,7 @@
         {
           "id": "btn_confirm",
           "component": {
-            "HlmButton": {
+            "Button": {
               "variant": "default",
               "child": "btn_confirm_text",
               "action": { "name": "btn_confirm_clicked" }
@@ -35,7 +35,7 @@
         {
           "id": "badge_status",
           "component": {
-            "HlmBadge": {
+            "Badge": {
               "variant": "secondary",
               "child": "badge_status_text"
             }

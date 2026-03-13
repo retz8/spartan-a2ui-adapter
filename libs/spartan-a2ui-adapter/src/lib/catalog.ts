@@ -3,7 +3,7 @@ import { inputBinding } from '@angular/core';
 
 export const SPARTAN_CATALOG = {
   ...DEFAULT_CATALOG,
-  HlmButton: {
+  Button: {
     type: () =>
       import('./components/hlm-button/hlm-button-wrapper.component').then(
         (r) => r.HlmButtonWrapperComponent,
@@ -15,7 +15,7 @@ export const SPARTAN_CATALOG = {
       inputBinding('href', () => ('href' in properties ? (properties['href'] as string) : undefined)),
     ],
   },
-  HlmBadge: {
+  Badge: {
     type: () =>
       import('./components/hlm-badge/hlm-badge-wrapper.component').then(
         (r) => r.HlmBadgeWrapperComponent,

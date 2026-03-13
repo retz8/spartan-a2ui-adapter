@@ -16,7 +16,7 @@
         {
           "id": "badge_new",
           "component": {
-            "HlmBadge": {
+            "Badge": {
               "variant": "default",
               "child": "badge_new_text"
             }

@@ -16,7 +16,7 @@
         {
           "id": "btn_submit",
           "component": {
-            "HlmButton": {
+            "Button": {
               "variant": "default",
               "child": "btn_submit_text",
               "action": { "name": "btn_submit_clicked" }

@@ -485,19 +485,50 @@
     },
     "Button": {
       "type": "object",
+      "description": "A styled button using Spartan UI. Supports visual variants and sizes.",
       "additionalProperties": false,
       "properties": {
+        "variant": {
+          "type": "string",
+          "description": "Visual style of the button.",
+          "enum": [
+            "default",
+            "destructive",
+            "outline",
+            "secondary",
+            "ghost",
+            "link"
+          ]
+        },
+        "size": {
+          "type": "string",
+          "description": "Size of the button. default/xs/sm/lg for text buttons; icon/icon-xs/icon-sm/icon-lg for square icon-only buttons.",
+          "enum": [
+            "default",
+            "xs",
+            "sm",
+            "lg",
+            "icon",
+            "icon-xs",
+            "icon-sm",
+            "icon-lg"
+          ]
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Whether the button is disabled. Disabled buttons are non-interactive and visually dimmed."
+        },
+        "href": {
+          "type": "string",
+          "description": "If provided, the button renders as an anchor (<a>) element with this href. Use with variant='link' for navigation actions."
+        },
         "child": {
           "type": "string",
           "description": "The ID of the component to display in the button, typically a Text component."
         },
-        "primary": {
-          "type": "boolean",
-          "description": "Indicates if this button should be styled as the primary action."
-        },
         "action": {
           "type": "object",
-          "description": "The client-side action to be dispatched when the button is clicked. It includes the action's name and an optional context payload.",
+          "description": "The client-side action to be dispatched when the button is clicked.",
           "additionalProperties": false,
           "properties": {
             "name": {
@@ -514,7 +545,6 @@
                   },
                   "value": {
                     "type": "object",
-                    "description": "Defines the value to be included in the context as either a literal value or a path to a data model value (e.g. '/user/name').",
                     "additionalProperties": false,
                     "properties": {
                       "path": {
@@ -543,11 +573,7 @@
             "name"
           ]
         }
-      },
-      "required": [
-        "child",
-        "action"
-      ]
+      }
     },
     "CheckBox": {
       "type": "object",
@@ -768,99 +794,7 @@
         "value"
       ]
     },
-    "HlmButton": {
-      "type": "object",
-      "description": "A styled button using Spartan UI. Supports visual variants and sizes.",
-      "additionalProperties": false,
-      "properties": {
-        "variant": {
-          "type": "string",
-          "description": "Visual style of the button.",
-          "enum": [
-            "default",
-            "destructive",
-            "outline",
-            "secondary",
-            "ghost",
-            "link"
-          ]
-        },
-        "size": {
-          "type": "string",
-          "description": "Size of the button. default/xs/sm/lg for text buttons; icon/icon-xs/icon-sm/icon-lg for square icon-only buttons.",
-          "enum": [
-            "default",
-            "xs",
-            "sm",
-            "lg",
-            "icon",
-            "icon-xs",
-            "icon-sm",
-            "icon-lg"
-          ]
-        },
-        "disabled": {
-          "type": "boolean",
-          "description": "Whether the button is disabled. Disabled buttons are non-interactive and visually dimmed."
-        },
-        "href": {
-          "type": "string",
-          "description": "If provided, the button renders as an anchor (<a>) element with this href. Use with variant='link' for navigation actions."
-        },
-        "child": {
-          "type": "string",
-          "description": "The ID of the component to display in the button, typically a Text component."
-        },
-        "action": {
-          "type": "object",
-          "description": "The client-side action to be dispatched when the button is clicked.",
-          "additionalProperties": false,
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "context": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "additionalProperties": false,
-                "properties": {
-                  "key": {
-                    "type": "string"
-                  },
-                  "value": {
-                    "type": "object",
-                    "additionalProperties": false,
-                    "properties": {
-                      "path": {
-                        "type": "string"
-                      },
-                      "literalString": {
-                        "type": "string"
-                      },
-                      "literalNumber": {
-                        "type": "number"
-                      },
-                      "literalBoolean": {
-                        "type": "boolean"
-                      }
-                    }
-                  }
-                },
-                "required": [
-                  "key",
-                  "value"
-                ]
-              }
-            }
-          },
-          "required": [
-            "name"
-          ]
-        }
-      }
-    },
-    "HlmBadge": {
+    "Badge": {
       "type": "object",
       "description": "A styled badge label using Spartan UI. Used to display a status, count, or category.",
       "additionalProperties": false,
