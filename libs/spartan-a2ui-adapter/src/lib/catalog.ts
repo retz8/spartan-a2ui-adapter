@@ -40,10 +40,11 @@ export const SPARTAN_CATALOG = {
       ),
     bindings: ({ properties }) => [
       inputBinding('value', () => {
-        const v = properties['value'] as { literalBoolean?: boolean } | undefined;
+        const props = properties as Record<string, unknown>;
+        const v = props['value'] as { literalBoolean?: boolean } | undefined;
         return v?.literalBoolean ?? false;
       }),
-      inputBinding('disabled', () => ('disabled' in properties && !!properties['disabled']) || false),
+      inputBinding('disabled', () => ('disabled' in properties && !!(properties as Record<string, unknown>)['disabled']) || false),
     ],
   },
 } as Catalog;
