@@ -89,22 +89,46 @@ https://github.com/retz8/spartan-a2ui-adapter/blob/main/libs/spartan-a2ui-adapte
 
 ## Components
 
-Supported components from the [Spartan UI](https://spartan.ng/components) library:
+Components from the [Spartan UI](https://spartan.ng/components) library, mapped to the A2UI catalog.
+
+### v1.0 — First release
+
+#### Standard A2UI types
+These map Spartan components to types defined in the [A2UI spec](https://a2ui.org). Agents reason about them using the standard schema.
+
+| A2UI type | Spartan component | Status |
+|---|---|---|
+| `Button` | HlmButton | ✅ done |
+| `Card` | HlmCard | ⬜ |
+| `TextField` | HlmInput / HlmTextarea | ⬜ |
+| `CheckBox` | HlmCheckbox | ⬜ |
+| `MultipleChoice` | HlmSelect | ⬜ |
+| `Divider` | HlmSeparator | ⬜ |
+| `Tabs` | HlmTabs | ⬜ |
+| `Slider` | HlmSlider | ⬜ |
+
+#### Spartan extensions
+Custom types defined in this adapter's `catalog.json`. Agents learn them from the schema and few-shot examples.
+
+| Custom type | Spartan component | Agent utility | Status |
+|---|---|---|---|
+| `Badge` | HlmBadge | Status labels, tags | ✅ done |
+| `Switch` | HlmSwitch | Toggle — distinct UX from checkbox | ⬜ |
+| `Alert` | HlmAlert | Agent communicating status / feedback | ⬜ |
+| `Spinner` | HlmSpinner | Loading state for async flows | ⬜ |
+| `Label` | HlmLabel | Form accessibility — pairs with inputs | ⬜ |
+
+### Planned
 
 - [ ] Accordion
-- [ ] Alert
 - [ ] Alert Dialog
 - [ ] Aspect Ratio
 - [ ] Autocomplete
 - [ ] Avatar
-- [x] Badge
 - [ ] Breadcrumb
-- [x] Button
 - [ ] Button Group
 - [ ] Calendar
-- [ ] Card
 - [ ] Carousel
-- [ ] Checkbox
 - [ ] Collapsible
 - [ ] Combobox
 - [ ] Command
@@ -118,14 +142,11 @@ Supported components from the [Spartan UI](https://spartan.ng/components) librar
 - [ ] Form Field
 - [ ] Hover Card
 - [ ] Icon
-- [ ] Input
 - [ ] Input Group
 - [ ] Input OTP
 - [ ] Item
 - [ ] Kbd
-- [ ] Label
 - [ ] Menubar
-- [ ] Native Select
 - [ ] Navigation Menu
 - [ ] Pagination
 - [ ] Popover
@@ -133,18 +154,11 @@ Supported components from the [Spartan UI](https://spartan.ng/components) librar
 - [ ] Radio Group
 - [ ] Resizable
 - [ ] Scroll Area
-- [ ] Select
-- [ ] Separator
 - [ ] Sheet
 - [ ] Sidebar
 - [ ] Skeleton
-- [ ] Slider
 - [ ] Sonner (Toast)
-- [ ] Spinner
-- [ ] Switch
 - [ ] Table
-- [ ] Tabs
-- [ ] Textarea
 - [ ] Toggle
 - [ ] Toggle Group
 - [ ] Tooltip
