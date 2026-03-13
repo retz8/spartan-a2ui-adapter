@@ -577,6 +577,7 @@
     },
     "CheckBox": {
       "type": "object",
+      "description": "A styled checkbox input using Spartan UI. Renders a boolean toggle with an inline label. Use for boolean form fields, filters, and settings toggles.",
       "additionalProperties": false,
       "properties": {
         "label": {
@@ -594,7 +595,7 @@
         },
         "value": {
           "type": "object",
-          "description": "The current state of the checkbox (true for checked, false for unchecked). This can be a literal boolean ('literalBoolean') or a reference to a value in the data model ('path', e.g. '/filter/open').",
+          "description": "The current checked state of the checkbox (true for checked, false for unchecked). This can be a literal boolean ('literalBoolean') or a reference to a value in the data model ('path', e.g. '/filter/open').",
           "additionalProperties": false,
           "properties": {
             "literalBoolean": {
@@ -604,6 +605,10 @@
               "type": "string"
             }
           }
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Whether the checkbox is disabled. Disabled checkboxes are non-interactive and visually dimmed."
         }
       },
       "required": [

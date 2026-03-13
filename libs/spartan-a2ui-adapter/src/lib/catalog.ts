@@ -33,4 +33,17 @@ export const SPARTAN_CATALOG = {
       inputBinding('size', () => ('size' in properties && properties['size']) || 'default'),
     ],
   },
+  CheckBox: {
+    type: () =>
+      import('./components/hlm-checkbox/hlm-checkbox-wrapper.component').then(
+        (r) => r.HlmCheckboxWrapperComponent,
+      ),
+    bindings: ({ properties }) => [
+      inputBinding('value', () => {
+        const v = properties['value'] as { literalBoolean?: boolean } | undefined;
+        return v?.literalBoolean ?? false;
+      }),
+      inputBinding('disabled', () => ('disabled' in properties && !!properties['disabled']) || false),
+    ],
+  },
 } as Catalog;

@@ -32,6 +32,12 @@
       ],
       "@spartan-ng/helm/card": [
         "libs/ui/card/src/index.ts"
+      ],
+      "@spartan-ng/helm/checkbox": [
+        "libs/ui/checkbox/checkbox/src/index.ts"
+      ],
+      "@spartan-ng/helm/icon": [
+        "libs/ui/checkbox/icon/src/index.ts"
       ]
     }
   },

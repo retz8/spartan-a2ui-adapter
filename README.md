@@ -101,7 +101,7 @@ These map Spartan components to types defined in the [A2UI spec](https://a2ui.or
 | `Button` | HlmButton | ✅ done |
 | `Card` | HlmCard | ✅ done |
 | `TextField` | HlmInput / HlmTextarea | ⬜ |
-| `CheckBox` | HlmCheckbox | ⬜ |
+| `CheckBox` | HlmCheckbox | ✅ done |
 | `MultipleChoice` | HlmSelect | ⬜ |
 | `Divider` | HlmSeparator | ⬜ |
 | `Tabs` | HlmTabs | ⬜ |

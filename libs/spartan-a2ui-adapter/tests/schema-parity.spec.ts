@@ -22,6 +22,7 @@ const SCHEMA_ONLY: Record<string, string[]> = {
   Button: ['child', 'action'],
   Badge: ['child'],
   Card: ['child', 'children'],
+  CheckBox: ['label'],
 };
 
 describe('Badge schema parity', () => {
@@ -64,6 +65,29 @@ describe('Card schema parity', () => {
 
   it('input() declarations match inputBindings', () => {
     const bindingNames = getInputBindingNames(CATALOG_TS, 'Card');
+    const inputNames = getInputDeclarationNames(WRAPPER);
+
+    expect(inputNames.sort()).toEqual(bindingNames.sort());
+  });
+});
+
+describe('CheckBox schema parity', () => {
+  const WRAPPER = path.join(
+    LIB_ROOT,
+    'src/lib/components/hlm-checkbox/hlm-checkbox-wrapper.component.ts',
+  );
+
+  it('inputBindings cover all schema properties (minus schema-only)', () => {
+    const schemaProps = getSchemaProperties(CATALOG_JSON, 'CheckBox');
+    const bindingNames = getInputBindingNames(CATALOG_TS, 'CheckBox');
+    const allowlist = SCHEMA_ONLY['CheckBox'];
+
+    const expected = schemaProps.filter((p) => !allowlist.includes(p)).sort();
+    expect(bindingNames.sort()).toEqual(expected);
+  });
+
+  it('input() declarations match inputBindings', () => {
+    const bindingNames = getInputBindingNames(CATALOG_TS, 'CheckBox');
     const inputNames = getInputDeclarationNames(WRAPPER);
 
     expect(inputNames.sort()).toEqual(bindingNames.sort());

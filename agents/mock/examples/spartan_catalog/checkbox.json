@@ -1,0 +1,43 @@
+[
+  {
+    "surfaceUpdate": {
+      "surfaceId": "checkbox_surface",
+      "components": [
+        {
+          "id": "root",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": ["terms_checkbox", "newsletter_checkbox"]
+              }
+            }
+          }
+        },
+        {
+          "id": "terms_checkbox",
+          "component": {
+            "CheckBox": {
+              "label": { "literalString": "Accept terms and conditions" },
+              "value": { "literalBoolean": false }
+            }
+          }
+        },
+        {
+          "id": "newsletter_checkbox",
+          "component": {
+            "CheckBox": {
+              "label": { "literalString": "Subscribe to newsletter" },
+              "value": { "literalBoolean": true }
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "beginRendering": {
+      "surfaceId": "checkbox_surface",
+      "root": "root"
+    }
+  }
+]
