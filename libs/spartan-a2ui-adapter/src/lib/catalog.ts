@@ -65,4 +65,11 @@ export const SPARTAN_CATALOG = {
       }),
     ],
   },
+  Label: {
+    type: () =>
+      import('./components/hlm-label/hlm-label-wrapper.component').then(
+        (r) => r.HlmLabelWrapperComponent,
+      ),
+    bindings: () => [],
+  },
 } as Catalog;

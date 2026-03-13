@@ -116,7 +116,7 @@ Custom types defined in this adapter's `catalog.json`. Agents learn them from th
 | `Switch` | HlmSwitch | Toggle — distinct UX from checkbox | ⬜ |
 | `Alert` | HlmAlert | Agent communicating status / feedback | ⬜ |
 | `Spinner` | HlmSpinner | Loading state for async flows | ⬜ |
-| `Label` | HlmLabel | Form accessibility — pairs with inputs | ⬜ |
+| `Label` | HlmLabel | Form accessibility — pairs with inputs | ✅ done |
 
 ### Planned
 

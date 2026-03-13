@@ -5,3 +5,4 @@ export { HlmBadgeWrapperComponent } from './lib/components/hlm-badge/hlm-badge-w
 export { HlmCardWrapperComponent } from './lib/components/hlm-card/hlm-card-wrapper.component';
 export { HlmCheckboxWrapperComponent } from './lib/components/hlm-checkbox/hlm-checkbox-wrapper.component';
 export { HlmSeparatorWrapperComponent } from './lib/components/hlm-separator/hlm-separator-wrapper.component';
+export { HlmLabelWrapperComponent } from './lib/components/hlm-label/hlm-label-wrapper.component';

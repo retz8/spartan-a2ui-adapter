@@ -1,0 +1,70 @@
+[
+  {
+    "surfaceUpdate": {
+      "surfaceId": "label_surface",
+      "components": [
+        {
+          "id": "root",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": ["form_row"]
+              }
+            }
+          }
+        },
+        {
+          "id": "form_row",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": ["terms_label", "terms_checkbox"]
+              }
+            }
+          }
+        },
+        {
+          "id": "terms_label",
+          "component": {
+            "Label": {
+              "child": "terms_label_text"
+            }
+          }
+        },
+        {
+          "id": "terms_label_text",
+          "component": {
+            "Text": {
+              "text": { "literalString": "Accept terms and conditions" },
+              "usageHint": "body"
+            }
+          }
+        },
+        {
+          "id": "terms_checkbox",
+          "component": {
+            "CheckBox": {
+              "label": "terms_checkbox_label",
+              "value": { "literalBoolean": false }
+            }
+          }
+        },
+        {
+          "id": "terms_checkbox_label",
+          "component": {
+            "Text": {
+              "text": { "literalString": "I agree" },
+              "usageHint": "body"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "beginRendering": {
+      "surfaceId": "label_surface",
+      "root": "root"
+    }
+  }
+]

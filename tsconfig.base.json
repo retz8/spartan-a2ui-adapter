@@ -39,6 +39,9 @@
       "@spartan-ng/helm/separator": [
         "libs/ui/separator/separator/src/index.ts"
       ],
+      "@spartan-ng/helm/label": [
+        "libs/ui/label/label/src/index.ts"
+      ],
       "@spartan-ng/helm/icon": [
         "libs/ui/checkbox/icon/src/index.ts"
       ]

@@ -849,6 +849,18 @@
           }
         }
       }
+    },
+    "Label": {
+      "type": "object",
+      "description": "An accessible form label that associates descriptive text with a form control (Spartan UI extension). Place adjacent to CheckBox, TextField, or other inputs. Styled with Spartan's text-sm font-medium classes and inherits disabled state from peer inputs.",
+      "additionalProperties": false,
+      "properties": {
+        "child": {
+          "type": "string",
+          "description": "The component ID of the text content displayed inside the label (typically a Text node)."
+        }
+      },
+      "required": ["child"]
     }
   }
 }
