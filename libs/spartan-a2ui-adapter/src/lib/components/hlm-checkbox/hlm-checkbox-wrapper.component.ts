@@ -35,8 +35,10 @@ export class HlmCheckboxWrapperComponent extends DynamicComponent<Types.CustomNo
     return label?.literalString ?? '';
   });
 
-  handleCheckedChange(_checked: boolean): void {
-    const action = this.component().properties['action'] as unknown as Types.Action | undefined;
-    if (action) super.sendAction(action);
+  handleCheckedChange(checked: boolean): void {
+    const value = this.component().properties['value'] as { path?: string } | undefined;
+    if (value?.path) {
+      this.processor.setData(this.component(), value.path, checked, this.surfaceId());
+    }
   }
 }
