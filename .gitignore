@@ -55,3 +55,4 @@ vitest.config.*.timestamp*
 .env
 .env.local
 __pycache__/
+.venv/
