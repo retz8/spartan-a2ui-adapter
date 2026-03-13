@@ -1,7 +1,7 @@
 {
   "name": "card",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/ui/card/card/src",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/ui/card/src",
   "prefix": "hlm",
   "projectType": "library",
   "tags": [],
@@ -12,12 +12,12 @@
         "{workspaceRoot}/dist/{projectRoot}"
       ],
       "options": {
-        "project": "libs/ui/card/card/ng-package.json",
-        "tsConfig": "libs/ui/card/card/tsconfig.lib.json"
+        "project": "libs/ui/card/ng-package.json",
+        "tsConfig": "libs/ui/card/tsconfig.lib.json"
       },
       "configurations": {
         "production": {
-          "tsConfig": "libs/ui/card/card/tsconfig.lib.prod.json"
+          "tsConfig": "libs/ui/card/tsconfig.lib.prod.json"
         },
         "development": {}
       },

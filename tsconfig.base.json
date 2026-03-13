@@ -31,7 +31,7 @@
         "libs/ui/badge/src/index.ts"
       ],
       "@spartan-ng/helm/card": [
-        "libs/ui/card/card/src/index.ts"
+        "libs/ui/card/src/index.ts"
       ]
     }
   },
