@@ -47,4 +47,22 @@ export const SPARTAN_CATALOG = {
       inputBinding('disabled', () => ('disabled' in properties && !!(properties as Record<string, unknown>)['disabled']) || false),
     ],
   },
+  Separator: {
+    type: () =>
+      import('./components/hlm-separator/hlm-separator-wrapper.component').then(
+        (r) => r.HlmSeparatorWrapperComponent,
+      ),
+    bindings: ({ properties }) => [
+      inputBinding('orientation', () => {
+        const props = properties as Record<string, unknown>;
+        const o = props['orientation'] as { literalString?: string } | undefined;
+        return (o?.literalString as 'horizontal' | 'vertical') ?? 'horizontal';
+      }),
+      inputBinding('decorative', () => {
+        const props = properties as Record<string, unknown>;
+        const d = props['decorative'] as { literalBoolean?: boolean } | undefined;
+        return d?.literalBoolean ?? true;
+      }),
+    ],
+  },
 } as Catalog;

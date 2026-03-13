@@ -1,0 +1,52 @@
+[
+  {
+    "surfaceUpdate": {
+      "surfaceId": "separator_surface",
+      "components": [
+        {
+          "id": "root",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": ["above_text", "separator", "below_text"]
+              }
+            }
+          }
+        },
+        {
+          "id": "above_text",
+          "component": {
+            "Text": {
+              "text": { "literalString": "Section One" },
+              "usageHint": "h3"
+            }
+          }
+        },
+        {
+          "id": "separator",
+          "component": {
+            "Separator": {
+              "orientation": { "literalString": "horizontal" },
+              "decorative": { "literalBoolean": true }
+            }
+          }
+        },
+        {
+          "id": "below_text",
+          "component": {
+            "Text": {
+              "text": { "literalString": "Section Two" },
+              "usageHint": "body"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "beginRendering": {
+      "surfaceId": "separator_surface",
+      "root": "root"
+    }
+  }
+]

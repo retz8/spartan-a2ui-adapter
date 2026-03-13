@@ -815,6 +815,40 @@
         }
       },
       "required": ["child"]
+    },
+    "Separator": {
+      "type": "object",
+      "description": "A thin 1px line used to visually or semantically separate sections of content (Spartan UI). Use horizontally between stacked content blocks, or vertically between inline elements.",
+      "additionalProperties": false,
+      "properties": {
+        "orientation": {
+          "type": "object",
+          "description": "The direction of the separator line. 'horizontal' renders a full-width horizontal line (default); 'vertical' renders a full-height vertical line.",
+          "additionalProperties": false,
+          "properties": {
+            "literalString": {
+              "type": "string",
+              "enum": ["horizontal", "vertical"]
+            },
+            "path": {
+              "type": "string"
+            }
+          }
+        },
+        "decorative": {
+          "type": "object",
+          "description": "Whether the separator is purely decorative (default: true). When true, it is hidden from the accessibility tree (aria-hidden). Set to false to expose it as a landmark with role='separator'.",
+          "additionalProperties": false,
+          "properties": {
+            "literalBoolean": {
+              "type": "boolean"
+            },
+            "path": {
+              "type": "string"
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -113,6 +113,7 @@ Custom types defined in this adapter's `catalog.json`. Agents learn them from th
 | Custom type | Spartan component | Agent utility | Status |
 |---|---|---|---|
 | `Badge` | HlmBadge | Status labels, tags | ✅ done |
+| `Separator` | HlmSeparator | Visually/semantically separate content sections | ✅ done |
 | `Switch` | HlmSwitch | Toggle — distinct UX from checkbox | ⬜ |
 | `Alert` | HlmAlert | Agent communicating status / feedback | ⬜ |
 | `Spinner` | HlmSpinner | Loading state for async flows | ⬜ |

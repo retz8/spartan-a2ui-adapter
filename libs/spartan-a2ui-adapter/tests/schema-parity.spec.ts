@@ -23,6 +23,7 @@ const SCHEMA_ONLY: Record<string, string[]> = {
   Badge: ['child'],
   Card: ['child', 'children'],
   CheckBox: ['label'],
+  Separator: [],
 };
 
 describe('Badge schema parity', () => {
@@ -88,6 +89,29 @@ describe('CheckBox schema parity', () => {
 
   it('input() declarations match inputBindings', () => {
     const bindingNames = getInputBindingNames(CATALOG_TS, 'CheckBox');
+    const inputNames = getInputDeclarationNames(WRAPPER);
+
+    expect(inputNames.sort()).toEqual(bindingNames.sort());
+  });
+});
+
+describe('Separator schema parity', () => {
+  const WRAPPER = path.join(
+    LIB_ROOT,
+    'src/lib/components/hlm-separator/hlm-separator-wrapper.component.ts',
+  );
+
+  it('inputBindings cover all schema properties (minus schema-only)', () => {
+    const schemaProps = getSchemaProperties(CATALOG_JSON, 'Separator');
+    const bindingNames = getInputBindingNames(CATALOG_TS, 'Separator');
+    const allowlist = SCHEMA_ONLY['Separator'];
+
+    const expected = schemaProps.filter((p) => !allowlist.includes(p)).sort();
+    expect(bindingNames.sort()).toEqual(expected);
+  });
+
+  it('input() declarations match inputBindings', () => {
+    const bindingNames = getInputBindingNames(CATALOG_TS, 'Separator');
     const inputNames = getInputDeclarationNames(WRAPPER);
 
     expect(inputNames.sort()).toEqual(bindingNames.sort());
