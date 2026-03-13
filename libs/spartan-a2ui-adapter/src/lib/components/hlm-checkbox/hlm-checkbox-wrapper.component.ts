@@ -8,7 +8,7 @@ import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
   imports: [HlmCheckboxImports],
   template: `
     <div class="flex items-center space-x-2">
-      <hlm-checkbox [checked]="value()" [disabled]="disabled()" />
+      <hlm-checkbox [checked]="value()" [disabled]="disabled()" (checkedChange)="handleCheckedChange($event)" />
       <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
         {{ labelText() }}
       </label>
@@ -34,4 +34,9 @@ export class HlmCheckboxWrapperComponent extends DynamicComponent<Types.CustomNo
     const label = props['label'] as { literalString?: string } | undefined;
     return label?.literalString ?? '';
   });
+
+  handleCheckedChange(_checked: boolean): void {
+    const action = this.component().properties['action'] as unknown as Types.Action | undefined;
+    if (action) super.sendAction(action);
+  }
 }
