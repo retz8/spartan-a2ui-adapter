@@ -609,6 +609,53 @@
         "disabled": {
           "type": "boolean",
           "description": "Whether the checkbox is disabled. Disabled checkboxes are non-interactive and visually dimmed."
+        },
+        "action": {
+          "type": "object",
+          "description": "The client-side action to be dispatched when the checkbox state changes.",
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "context": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "path": {
+                        "type": "string"
+                      },
+                      "literalString": {
+                        "type": "string"
+                      },
+                      "literalNumber": {
+                        "type": "number"
+                      },
+                      "literalBoolean": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "key",
+                  "value"
+                ]
+              }
+            }
+          },
+          "required": [
+            "name"
+          ]
         }
       },
       "required": [
