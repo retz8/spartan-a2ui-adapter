@@ -53,7 +53,7 @@ npx nx test spartan-a2ui-adapter --testNamePattern="HlmButton"
 | Component | Parity test |
 |---|---|
 | `HlmButton` | Yes |
-| `HlmBadge` | Planned |
+| `HlmBadge` | Yes |
 
 ---
 
@@ -113,4 +113,4 @@ Describe blocks must contain the component name so `--testNamePattern` filtering
 | Component | Component test |
 |---|---|
 | `HlmButton` | Yes |
-| `HlmBadge` | Planned |
+| `HlmBadge` | Yes |
