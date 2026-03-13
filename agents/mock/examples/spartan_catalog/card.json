@@ -1,0 +1,70 @@
+[
+  {
+    "surfaceUpdate": {
+      "surfaceId": "card_surface",
+      "components": [
+        {
+          "id": "root",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": ["product_card"]
+              }
+            }
+          }
+        },
+        {
+          "id": "product_card",
+          "component": {
+            "Card": {
+              "children": ["card_title", "card_description", "card_badge"],
+              "size": "default"
+            }
+          }
+        },
+        {
+          "id": "card_title",
+          "component": {
+            "Text": {
+              "text": { "literalString": "Spartan UI Adapter" },
+              "usageHint": "h3"
+            }
+          }
+        },
+        {
+          "id": "card_description",
+          "component": {
+            "Text": {
+              "text": { "literalString": "Maps Spartan UI components to the A2UI protocol so agents can compose Angular UIs." },
+              "usageHint": "body"
+            }
+          }
+        },
+        {
+          "id": "card_badge",
+          "component": {
+            "HlmBadge": {
+              "variant": "secondary",
+              "child": "card_badge_text"
+            }
+          }
+        },
+        {
+          "id": "card_badge_text",
+          "component": {
+            "Text": {
+              "text": { "literalString": "v1.0" },
+              "usageHint": "body"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "beginRendering": {
+      "surfaceId": "card_surface",
+      "root": "root"
+    }
+  }
+]

@@ -391,16 +391,26 @@
     },
     "Card": {
       "type": "object",
+      "description": "A styled card container (Spartan UI). Renders children inside a rounded, shadowed card surface. Use for grouping related content like info panels, forms, or product summaries.",
       "additionalProperties": false,
       "properties": {
         "child": {
           "type": "string",
-          "description": "The ID of the component to be rendered inside the card."
+          "description": "The ID of a single component to render inside the card. Use 'children' instead when you have multiple children."
+        },
+        "children": {
+          "type": "array",
+          "description": "An ordered list of component IDs to render inside the card, top to bottom.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "size": {
+          "type": "string",
+          "description": "Layout density of the card. 'default' uses standard padding and spacing; 'sm' uses reduced padding for compact layouts.",
+          "enum": ["default", "sm"]
         }
-      },
-      "required": [
-        "child"
-      ]
+      }
     },
     "Tabs": {
       "type": "object",

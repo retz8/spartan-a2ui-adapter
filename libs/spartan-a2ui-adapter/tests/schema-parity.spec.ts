@@ -21,6 +21,7 @@ const CATALOG_TS = path.join(LIB_ROOT, 'src/lib/catalog.ts');
 const SCHEMA_ONLY: Record<string, string[]> = {
   HlmButton: ['child', 'action'],
   HlmBadge: ['child'],
+  Card: ['child', 'children'],
 };
 
 describe('HlmBadge schema parity', () => {
@@ -40,6 +41,29 @@ describe('HlmBadge schema parity', () => {
 
   it('input() declarations match inputBindings', () => {
     const bindingNames = getInputBindingNames(CATALOG_TS, 'HlmBadge');
+    const inputNames = getInputDeclarationNames(WRAPPER);
+
+    expect(inputNames.sort()).toEqual(bindingNames.sort());
+  });
+});
+
+describe('Card schema parity', () => {
+  const WRAPPER = path.join(
+    LIB_ROOT,
+    'src/lib/components/hlm-card/hlm-card-wrapper.component.ts',
+  );
+
+  it('inputBindings cover all schema properties (minus schema-only)', () => {
+    const schemaProps = getSchemaProperties(CATALOG_JSON, 'Card');
+    const bindingNames = getInputBindingNames(CATALOG_TS, 'Card');
+    const allowlist = SCHEMA_ONLY['Card'];
+
+    const expected = schemaProps.filter((p) => !allowlist.includes(p)).sort();
+    expect(bindingNames.sort()).toEqual(expected);
+  });
+
+  it('input() declarations match inputBindings', () => {
+    const bindingNames = getInputBindingNames(CATALOG_TS, 'Card');
     const inputNames = getInputDeclarationNames(WRAPPER);
 
     expect(inputNames.sort()).toEqual(bindingNames.sort());

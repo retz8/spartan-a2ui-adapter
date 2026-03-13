@@ -24,4 +24,13 @@ export const SPARTAN_CATALOG = {
       inputBinding('variant', () => ('variant' in properties && properties['variant']) || 'default'),
     ],
   },
+  Card: {
+    type: () =>
+      import('./components/hlm-card/hlm-card-wrapper.component').then(
+        (r) => r.HlmCardWrapperComponent,
+      ),
+    bindings: ({ properties }) => [
+      inputBinding('size', () => ('size' in properties && properties['size']) || 'default'),
+    ],
+  },
 } as Catalog;
