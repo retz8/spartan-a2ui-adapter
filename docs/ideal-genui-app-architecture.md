@@ -40,9 +40,11 @@
                      User: "Book a flight to New York"
 ```
 
-The whole point: **the brand authors five things (FE, ID, adapter, agent, server,
-DB); the host authors nothing.** Installing the app is registering one
-`ID → adapter` pair.
+The whole point: **KAL authors and runs everything (thin FE, ID, adapter, agent,
+server, DB); the host authors nothing and installs nothing of KAL's backend.**
+From the host's side, installing the app is registering one `ID → adapter` pair
+and pointing at the agent endpoint — the agent, server, and DB stay on KAL's
+infrastructure.
 
 ---
 
@@ -53,16 +55,26 @@ this architecture the fixed screens are removed and replaced by a *generator*. T
 brand's agent emits UI **intent as data** (A2UI), and the host renders that data
 with the brand's own component **adapter**.
 
-So "installing Korean Air" is not downloading a binary of screens. It is
-registering a published bundle:
+So "installing Korean Air" is not downloading a binary of screens. From the
+super-app's point of view it is registering just **two** things and pointing at an
+endpoint — the agent, server, and DB stay on KAL's own infrastructure and are
+never installed into the host:
 
 ```
-KAL brand bundle =
-  ├── KAL thin FE   — defines KAL_ID + the renderer adapter(s)
+What the super-app receives (registers):
+  ├── KAL_ID              — the vocabulary contract
+  └── KAL_REACT_CATALOG   — the renderer adapter
+  + a pointer to the KAL agent endpoint (to talk to)
+
+What KAL runs on its own infrastructure (host never installs these):
   ├── KAL agent     — judgment: orchestration + surface generation
   ├── KAL server    — execution: business logic + MCP tools + hard-rule gate
   └── KAL DB        — persistence
 ```
+
+The host only ever holds the **ID + adapter** and a channel to the agent. The
+agent, server, and DB are KAL's to operate; the host reaches them only indirectly,
+by exchanging A2UI streams and action events with the agent endpoint.
 
 The user says *"Book me a flight to New York"* and what appears is a UI built from
 **Korean Air's sky-blue components**, with interactions wired and server calls
@@ -184,7 +196,9 @@ generative checkout flow safe.
 
 ## 5. The host side: register, don't author
 
-The super-app host is a **separate thin runtime**. It authors nothing. It:
+The super-app host is a **separate thin runtime**. It authors nothing and installs
+none of KAL's backend — it holds only the **two symbols** (`KAL_ID` + the adapter)
+plus a channel to the agent endpoint:
 
 ```ts
 // Installing KAL into a React super-app
@@ -233,7 +247,8 @@ together by `KAL_ID`.
 - **KAL server** is execution: business logic, MCP tools, and the hard-rule gate.
   Hard workflow lives here as MCP preconditions.
 - **KAL DB** is persistence, reachable only through the server.
-- **The super-app host** registers `KAL_ID → adapter` and renders; it authors
-  nothing and talks only to the agent.
+- **The super-app host** registers only the two symbols (`KAL_ID` + adapter),
+  renders surfaces, and talks to the agent endpoint. It authors nothing and
+  installs none of KAL's agent, server, or DB — those stay on KAL's infrastructure.
 - The layer boundaries double as **trust boundaries**, and the safety-critical
   rules sit at the server's MCP gate — never in the agent's prompt.
