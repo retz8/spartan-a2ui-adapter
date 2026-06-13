@@ -42,9 +42,9 @@
 
 The whole point: **KAL authors and runs everything (thin FE, ID, adapter, agent,
 server, DB); the host authors nothing and installs nothing of KAL's backend.**
-From the host's side, installing the app is registering one `ID → adapter` pair
-and pointing at the agent endpoint — the agent, server, and DB stay on KAL's
-infrastructure.
+From the host's side, installing the app is registering three symbols — `KAL_ID`,
+the adapter, and the agent's URL — and rendering what the agent streams back. The
+agent, server, and DB stay on KAL's infrastructure.
 
 ---
 
@@ -56,15 +56,15 @@ brand's agent emits UI **intent as data** (A2UI), and the host renders that data
 with the brand's own component **adapter**.
 
 So "installing Korean Air" is not downloading a binary of screens. From the
-super-app's point of view it is registering just **two** things and pointing at an
-endpoint — the agent, server, and DB stay on KAL's own infrastructure and are
+super-app's point of view it is registering **three** things — and the third is
+just a URL. The agent, server, and DB stay on KAL's own infrastructure and are
 never installed into the host:
 
 ```
 What the super-app receives (registers):
   ├── KAL_ID              — the vocabulary contract
-  └── KAL_REACT_CATALOG   — the renderer adapter
-  + a pointer to the KAL agent endpoint (to talk to)
+  ├── KAL_REACT_CATALOG   — the renderer adapter
+  └── KAL_AGENT_URL       — the agent endpoint (just a URL to POST to)
 
 What KAL runs on its own infrastructure (host never installs these):
   ├── KAL agent     — judgment: orchestration + surface generation
@@ -72,9 +72,11 @@ What KAL runs on its own infrastructure (host never installs these):
   └── KAL DB        — persistence
 ```
 
-The host only ever holds the **ID + adapter** and a channel to the agent. The
-agent, server, and DB are KAL's to operate; the host reaches them only indirectly,
-by exchanging A2UI streams and action events with the agent endpoint.
+The host only ever holds those **three symbols** — `KAL_ID`, the adapter, and
+`KAL_AGENT_URL`. It POSTs user messages straight to that URL, advertising which
+catalog it can render via an `a2uiClientCapabilities` handshake
+(`supportedCatalogIds: [KAL_ID]`), and renders the A2UI the agent streams back. The
+server and DB sit behind the agent; the host never sees them.
 
 The user says *"Book me a flight to New York"* and what appears is a UI built from
 **Korean Air's sky-blue components**, with interactions wired and server calls
@@ -197,13 +199,22 @@ generative checkout flow safe.
 ## 5. The host side: register, don't author
 
 The super-app host is a **separate thin runtime**. It authors nothing and installs
-none of KAL's backend — it holds only the **two symbols** (`KAL_ID` + the adapter)
-plus a channel to the agent endpoint:
+none of KAL's backend — it holds only the **three symbols** (`KAL_ID`, the
+adapter, and `KAL_AGENT_URL`):
 
 ```ts
-// Installing KAL into a React super-app
+// 1. Register the adapter against the ID
 provideA2UI({
   catalogs: { [KAL_ID]: KAL_REACT_CATALOG },  // one line per installed brand
+});
+
+// 2. Talk to the agent at its URL, advertising what we can render
+fetch(KAL_AGENT_URL, {
+  method: 'POST',
+  body: JSON.stringify({
+    /* user message */
+    metadata: { a2uiClientCapabilities: { supportedCatalogIds: [KAL_ID] } },
+  }),
 });
 ```
 
@@ -213,8 +224,8 @@ After registration, the host's A2UI Surface renderer:
 - sends action events back to the KAL agent,
 
 and nothing else. Adding another brand (a bank, a delivery app) is another
-one-line registration with that brand's own ID and adapter. The host's source does
-not change per brand — installation is registration.
+registration with that brand's own ID, adapter, and agent URL. The host's source
+does not change per brand — installation is registration.
 
 > The brand look rides in the **adapter**, not in the A2UI stream. The agent sends
 > *"render a `FlightCard` with these flights"*; the registered adapter decides a
@@ -247,8 +258,9 @@ together by `KAL_ID`.
 - **KAL server** is execution: business logic, MCP tools, and the hard-rule gate.
   Hard workflow lives here as MCP preconditions.
 - **KAL DB** is persistence, reachable only through the server.
-- **The super-app host** registers only the two symbols (`KAL_ID` + adapter),
-  renders surfaces, and talks to the agent endpoint. It authors nothing and
-  installs none of KAL's agent, server, or DB — those stay on KAL's infrastructure.
+- **The super-app host** registers three symbols (`KAL_ID`, the adapter, and the
+  agent's URL), POSTs user messages to that URL with a capabilities handshake, and
+  renders surfaces. It authors nothing and installs none of KAL's agent, server, or
+  DB — those stay on KAL's infrastructure.
 - The layer boundaries double as **trust boundaries**, and the safety-critical
   rules sit at the server's MCP gate — never in the agent's prompt.
