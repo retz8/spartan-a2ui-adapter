@@ -1,0 +1,64 @@
+<svg width="100%" viewBox="0 0 680 510" xmlns="http://www.w3.org/2000/svg" role="img" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+<title>Screen 3 — YouTube review surface bridged to delivery</title>
+<desc>Jarvis summons a YouTube agent for butter tteok reviews while keeping the food context, then bridges the reviewed shops to delivery agents so the user can order the same item.</desc>
+<rect x="0" y="0" width="680" height="510" rx="14" fill="#F4F2EC"/>
+
+<circle cx="32" cy="34" r="13" fill="#1f1e1c"/>
+<text x="32" y="39" text-anchor="middle" font-size="14" fill="#fff">✦</text>
+<text x="54" y="30" font-size="14" font-weight="600" fill="#1f1e1c">jarvis · 버터떡 후기 찾아보기</text>
+<text x="54" y="48" font-size="12" fill="#6b6a64">유튜브 agent 소집 · 저녁 메뉴 맥락 유지중</text>
+<rect x="576" y="22" width="82" height="24" rx="12" fill="none" stroke="#cfcdc4" stroke-width="0.5"/>
+<text x="617" y="38" text-anchor="middle" font-size="11" fill="#8a8980">context kept</text>
+
+<text x="20" y="74" font-size="11" fill="#8a8980"><tspan fill="#6b6a64">저녁 메뉴 고민</tspan>  →  <tspan fill="#FF0000" font-weight="600">유튜브 agent</tspan>  →  후기 → 배달 연결</text>
+
+<!-- YouTube surface -->
+<rect x="16" y="86" width="648" height="186" rx="14" fill="#ffffff" stroke="#e5e3dc" stroke-width="0.5"/>
+<path d="M16 100 a14 14 0 0 1 14 -14 h620 a14 14 0 0 1 14 14 v20 h-648 z" fill="#FF0000"/>
+<text x="32" y="108" font-size="14" font-weight="700" fill="#ffffff">▶ YouTube</text>
+<rect x="520" y="92" width="128" height="18" rx="9" fill="#ffffff" fill-opacity="0.22"/>
+<text x="584" y="105" text-anchor="middle" font-size="10" fill="#fff">"버터떡 후기" 검색결과</text>
+
+<rect x="32" y="132" width="140" height="84" rx="9" fill="#1a1a1a"/>
+<text x="102" y="180" text-anchor="middle" font-size="28" fill="#ffffff">▶</text>
+<rect x="138" y="196" width="30" height="15" rx="4" fill="#000" fill-opacity="0.8"/>
+<text x="153" y="207" text-anchor="middle" font-size="9" fill="#fff">8:42</text>
+<rect x="36" y="136" width="56" height="15" rx="4" fill="#FF0000"/>
+<text x="64" y="147" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">🔥 급상승</text>
+<text x="186" y="146" font-size="13" font-weight="500" fill="#0f0f0f">요즘 난리난 '버터떡' 솔직후기 (인생디저트 등극)</text>
+<text x="186" y="164" font-size="11" fill="#606060">먹kbee · 조회수 87만 · 3일 전</text>
+<text x="186" y="184" font-size="11" fill="#606060">겉바속쫀 진짜 미쳤고... 따뜻할 때 먹어야 함. 3군데 비교했는데</text>
+<text x="186" y="200" font-size="11" fill="#606060">2번째가 제일 맛있었어요</text>
+
+<!-- bridge callout -->
+<rect x="16" y="284" width="648" height="46" rx="14" fill="#E6F1FB"/>
+<text x="34" y="306" font-size="13" font-weight="500" fill="#185FA5">💡 jarvis가 영상 속 버터떡을 배달로 연결했어요</text>
+<text x="34" y="322" font-size="11" fill="#185FA5" opacity="0.85">두 영상에서 언급된 매장 중, 지금 서초구로 배달 가능한 곳을 켜둔 배달 agent에서 찾았어요.</text>
+
+<!-- bridged delivery options -->
+<rect x="16" y="342" width="648" height="152" rx="14" fill="#ffffff" stroke="#e5e3dc" stroke-width="0.5"/>
+<text x="36" y="368" font-size="13" font-weight="500" fill="#1f1e1c">🍴 영상 속 버터떡 · 지금 배달 가능</text>
+
+<rect x="36" y="382" width="42" height="42" rx="10" fill="#FAEEDA"/>
+<text x="57" y="409" text-anchor="middle" font-size="20" fill="#BA7517">🍪</text>
+<text x="92" y="396" font-size="13" font-weight="500" fill="#1f1e1c">버터떡 오리지널 (4구)</text>
+<text x="92" y="412" font-size="11" fill="#6b6a64">영상 1위 매장 · 떡장인</text>
+<rect x="486" y="386" width="78" height="17" rx="8" fill="#E8F8F7"/>
+<circle cx="498" cy="394" r="3" fill="#2AC1BC"/>
+<text x="508" y="398" font-size="10" fill="#0a4d4a">배민 24분</text>
+<text x="610" y="412" text-anchor="end" font-size="13" font-weight="700" fill="#1f1e1c">8,900원</text>
+<circle cx="634" cy="403" r="14" fill="#1f1e1c"/>
+<text x="634" y="408" text-anchor="middle" font-size="16" fill="#fff">+</text>
+<line x1="36" y1="438" x2="648" y2="438" stroke="#eee" stroke-width="0.5"/>
+
+<rect x="36" y="448" width="42" height="42" rx="10" fill="#FAEEDA"/>
+<text x="57" y="475" text-anchor="middle" font-size="20" fill="#BA7517">🥣</text>
+<text x="92" y="462" font-size="13" font-weight="500" fill="#1f1e1c">흑임자 버터떡 (6구)</text>
+<text x="92" y="478" font-size="11" fill="#6b6a64">영상 3위 · 가성비 매장 · 떡방앗간</text>
+<rect x="470" y="452" width="94" height="17" rx="8" fill="#FBE5EE"/>
+<circle cx="482" cy="460" r="3" fill="#D70F64"/>
+<text x="492" y="464" font-size="10" fill="#8a0a40">쿠팡이츠 17분</text>
+<text x="610" y="478" text-anchor="end" font-size="13" font-weight="700" fill="#1f1e1c">11,500원</text>
+<circle cx="634" cy="469" r="14" fill="#1f1e1c"/>
+<text x="634" y="474" text-anchor="middle" font-size="16" fill="#fff">+</text>
+</svg>

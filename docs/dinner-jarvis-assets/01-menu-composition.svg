@@ -1,0 +1,111 @@
+<svg width="100%" viewBox="0 0 680 470" xmlns="http://www.w3.org/2000/svg" role="img" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+<title>Screen 1 — three delivery agents composed into one menu view</title>
+<desc>Jarvis summons Baemin, Coupang Eats, and Yogiyo agents and lays their menu surfaces side by side, each keeping its own brand color.</desc>
+<rect x="0" y="0" width="680" height="470" rx="14" fill="#F4F2EC"/>
+
+<circle cx="32" cy="34" r="13" fill="#1f1e1c"/>
+<text x="32" y="39" text-anchor="middle" font-size="14" fill="#fff">✦</text>
+<text x="54" y="30" font-size="14" font-weight="600" fill="#1f1e1c">jarvis · 오늘 저녁 뭐 먹지</text>
+<text x="54" y="48" font-size="12" fill="#6b6a64">3개 배달 agent 합성 · 위치 서초구</text>
+<rect x="566" y="22" width="92" height="24" rx="12" fill="none" stroke="#cfcdc4" stroke-width="0.5"/>
+<text x="612" y="38" text-anchor="middle" font-size="11" fill="#8a8980">composed live</text>
+
+<!-- Baemin card -->
+<g>
+<rect x="16" y="66" width="208" height="386" rx="14" fill="#ffffff" stroke="#e5e3dc" stroke-width="0.5"/>
+<path d="M16 80 a14 14 0 0 1 14 -14 h180 a14 14 0 0 1 14 14 v22 h-208 z" fill="#2AC1BC"/>
+<text x="32" y="89" font-size="14" font-weight="700" fill="#0a4d4a">배달의민족</text>
+<rect x="170" y="74" width="40" height="18" rx="9" fill="#ffffff" fill-opacity="0.45"/>
+<text x="190" y="87" text-anchor="middle" font-size="10" fill="#0a4d4a">28분</text>
+<text x="32" y="124" font-size="11" font-weight="500" fill="#0a6e6a">🔥 우리동네 인기</text>
+
+<rect x="32" y="136" width="40" height="40" rx="9" fill="#E8F8F7"/>
+<text x="52" y="162" text-anchor="middle" font-size="19" fill="#2AC1BC">🍲</text>
+<text x="80" y="146" font-size="12" font-weight="500" fill="#222">김치찌개 정식</text>
+<text x="80" y="161" font-size="10" fill="#888">★ 4.8 (2,104)</text>
+<text x="80" y="176" font-size="12" font-weight="700" fill="#222">9,500원</text>
+<circle cx="200" cy="156" r="14" fill="#2AC1BC"/>
+<text x="200" y="161" text-anchor="middle" font-size="16" fill="#fff">+</text>
+<line x1="32" y1="190" x2="208" y2="190" stroke="#eee" stroke-width="0.5"/>
+
+<rect x="32" y="202" width="40" height="40" rx="9" fill="#E8F8F7"/>
+<text x="52" y="228" text-anchor="middle" font-size="19" fill="#2AC1BC">🍖</text>
+<text x="80" y="212" font-size="12" font-weight="500" fill="#222">제육볶음</text>
+<text x="80" y="227" font-size="10" fill="#888">★ 4.7 (1,560)</text>
+<text x="80" y="242" font-size="12" font-weight="700" fill="#222">11,000원</text>
+<circle cx="200" cy="222" r="14" fill="#2AC1BC"/>
+<text x="200" y="227" text-anchor="middle" font-size="16" fill="#fff">+</text>
+</g>
+
+<!-- Coupang Eats card -->
+<g>
+<rect x="236" y="66" width="208" height="386" rx="14" fill="#ffffff" stroke="#e5e3dc" stroke-width="0.5"/>
+<path d="M236 80 a14 14 0 0 1 14 -14 h180 a14 14 0 0 1 14 14 v22 h-208 z" fill="#D70F64"/>
+<text x="252" y="89" font-size="14" font-weight="700" fill="#ffffff">쿠팡이츠</text>
+<rect x="372" y="74" width="60" height="18" rx="9" fill="#ffffff" fill-opacity="0.22"/>
+<text x="402" y="87" text-anchor="middle" font-size="10" fill="#fff">단건 19분</text>
+<text x="252" y="124" font-size="11" font-weight="500" fill="#D70F64">⚡ 가장 빠른 배달</text>
+
+<rect x="252" y="136" width="40" height="40" rx="9" fill="#FBE5EE"/>
+<text x="272" y="162" text-anchor="middle" font-size="19" fill="#D70F64">🍕</text>
+<text x="300" y="146" font-size="12" font-weight="500" fill="#222">페퍼로니 피자 L</text>
+<text x="300" y="161" font-size="10" fill="#888">★ 4.9 (980)</text>
+<text x="300" y="176" font-size="12" font-weight="700" fill="#222">18,900원</text>
+<rect x="406" y="142" width="28" height="28" rx="8" fill="#D70F64"/>
+<text x="420" y="161" text-anchor="middle" font-size="16" fill="#fff">+</text>
+<line x1="252" y1="190" x2="428" y2="190" stroke="#eee" stroke-width="0.5"/>
+
+<rect x="252" y="202" width="40" height="40" rx="9" fill="#FBE5EE"/>
+<text x="272" y="228" text-anchor="middle" font-size="19" fill="#D70F64">🥗</text>
+<text x="300" y="212" font-size="12" font-weight="500" fill="#222">치킨 샐러드</text>
+<text x="300" y="227" font-size="10" fill="#888">★ 4.6 (412)</text>
+<text x="300" y="242" font-size="12" font-weight="700" fill="#222">12,500원</text>
+<rect x="406" y="208" width="28" height="28" rx="8" fill="#D70F64"/>
+<text x="420" y="227" text-anchor="middle" font-size="16" fill="#fff">+</text>
+</g>
+
+<!-- Yogiyo card -->
+<g>
+<rect x="456" y="66" width="208" height="386" rx="14" fill="#ffffff" stroke="#e5e3dc" stroke-width="0.5"/>
+<path d="M456 80 a14 14 0 0 1 14 -14 h180 a14 14 0 0 1 14 14 v22 h-208 z" fill="#EB1F23"/>
+<text x="472" y="89" font-size="14" font-weight="700" fill="#ffffff">요기요</text>
+<rect x="606" y="74" width="40" height="18" rx="9" fill="#ffffff" fill-opacity="0.22"/>
+<text x="626" y="87" text-anchor="middle" font-size="10" fill="#fff">35분</text>
+<text x="472" y="124" font-size="11" font-weight="500" fill="#EB1F23">🏷 할인 진행중</text>
+
+<rect x="472" y="136" width="40" height="40" rx="9" fill="#FDE7E7"/>
+<text x="492" y="162" text-anchor="middle" font-size="19" fill="#EB1F23">🍜</text>
+<text x="520" y="146" font-size="12" font-weight="500" fill="#222">마라탕 (중)</text>
+<text x="520" y="161" font-size="10" fill="#888">★ 4.5 (1,887)</text>
+<text x="520" y="176" font-size="12" font-weight="700" fill="#222">13,800원</text>
+<circle cx="640" cy="156" r="14" fill="#EB1F23"/>
+<text x="640" y="161" text-anchor="middle" font-size="16" fill="#fff">+</text>
+<line x1="472" y1="190" x2="648" y2="190" stroke="#eee" stroke-width="0.5"/>
+
+<rect x="472" y="202" width="40" height="40" rx="9" fill="#FDE7E7"/>
+<text x="492" y="228" text-anchor="middle" font-size="19" fill="#EB1F23">🍢</text>
+<text x="520" y="212" font-size="12" font-weight="500" fill="#222">탕수육 (소)</text>
+<text x="520" y="227" font-size="10" fill="#888">★ 4.4 (905)</text>
+<text x="520" y="242" font-size="12" font-weight="700" fill="#222">15,000원</text>
+<circle cx="640" cy="222" r="14" fill="#EB1F23"/>
+<text x="640" y="227" text-anchor="middle" font-size="16" fill="#fff">+</text>
+</g>
+
+<text x="340" y="290" text-anchor="middle" font-size="11" fill="#8a8980">↑ 세 brand 메뉴 surface가 한 화면에 합성됨 — 각자 자기 색을 그대로 유지 (배민 민트 · 쿠팡이츠 마젠타 · 요기요 레드)</text>
+
+<!-- unified cart -->
+<rect x="16" y="312" width="648" height="124" rx="14" fill="#ffffff" stroke="#e5e3dc" stroke-width="0.5"/>
+<text x="36" y="338" font-size="14" font-weight="500" fill="#1f1e1c">🛒 jarvis 통합 장바구니</text>
+<text x="648" y="338" text-anchor="end" font-size="12" fill="#6b6a64">2개 brand · 3개 항목</text>
+<circle cx="40" cy="362" r="4" fill="#2AC1BC"/>
+<text x="52" y="366" font-size="12" fill="#222">김치찌개 정식 · 배민</text>
+<text x="648" y="366" text-anchor="end" font-size="12" fill="#6b6a64">9,500원</text>
+<circle cx="40" cy="384" r="4" fill="#D70F64"/>
+<text x="52" y="388" font-size="12" fill="#222">페퍼로니 피자 L · 쿠팡이츠</text>
+<text x="648" y="388" text-anchor="end" font-size="12" fill="#6b6a64">18,900원</text>
+<circle cx="40" cy="406" r="4" fill="#D70F64"/>
+<text x="52" y="410" font-size="12" fill="#222">치킨 샐러드 · 쿠팡이츠</text>
+<text x="648" y="410" text-anchor="end" font-size="12" fill="#6b6a64">12,500원</text>
+<text x="36" y="428" font-size="13" fill="#6b6a64">합계</text>
+<text x="648" y="430" text-anchor="end" font-size="16" font-weight="600" fill="#1f1e1c">40,900원</text>
+</svg>
