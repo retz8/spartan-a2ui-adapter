@@ -1,0 +1,139 @@
+<h2 class="sr-only">A super-agent screen composing menu surfaces from three Korean delivery brands — Baemin, Coupang Eats, and Yogiyo — each keeping its own brand styling, with a unified cart and order routing.</h2>
+
+<div style="background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 14px;">
+
+<div style="display:flex; align-items:center; gap:10px; padding:4px 6px 14px;">
+  <div style="width:28px; height:28px; border-radius:50%; background:var(--color-text-primary); color:var(--color-background-primary); display:flex; align-items:center; justify-content:center; font-size:14px;"><i class="ti ti-sparkles" aria-hidden="true"></i></div>
+  <div style="flex:1;">
+    <div style="font-size:14px; font-weight:500; color:var(--color-text-primary);">jarvis · 오늘 저녁 뭐 먹지</div>
+    <div style="font-size:12px; color:var(--color-text-secondary);">3개 배달 agent 합성 · 위치 서초구</div>
+  </div>
+  <div style="font-size:12px; color:var(--color-text-tertiary); border:0.5px solid var(--color-border-tertiary); border-radius:999px; padding:4px 10px;">composed live</div>
+</div>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(195px, 1fr)); gap:10px;">
+
+  <div style="background:#fff; border-radius:14px; overflow:hidden; border:0.5px solid rgba(0,0,0,0.08);">
+    <div style="background:#2AC1BC; padding:10px 12px; display:flex; align-items:center; gap:7px;">
+      <span style="font-size:15px; font-weight:700; color:#0a4d4a; letter-spacing:-0.5px;">배달의민족</span>
+      <span style="margin-left:auto; font-size:11px; color:#0a4d4a; background:rgba(255,255,255,0.45); border-radius:999px; padding:2px 8px;">28분</span>
+    </div>
+    <div style="padding:10px 12px;">
+      <div style="font-size:11px; color:#0a6e6a; font-weight:500; margin-bottom:8px;"><i class="ti ti-flame" aria-hidden="true" style="vertical-align:-2px;"></i> 우리동네 인기</div>
+      <div style="display:flex; gap:9px; padding:7px 0; border-bottom:0.5px solid #eee;">
+        <div style="width:46px; height:46px; border-radius:10px; background:#E8F8F7; flex-shrink:0; display:flex; align-items:center; justify-content:center; color:#2AC1BC; font-size:22px;"><i class="ti ti-bowl" aria-hidden="true"></i></div>
+        <div style="flex:1; min-width:0;">
+          <div style="font-size:13px; font-weight:500; color:#222;">김치찌개 정식</div>
+          <div style="font-size:11px; color:#888;">★ 4.8 (2,104)</div>
+          <div style="font-size:13px; font-weight:700; color:#222; margin-top:2px;">9,500원</div>
+        </div>
+        <button onclick="sendPrompt('배민에서 김치찌개 정식 장바구니에 담아줘')" aria-label="담기" style="align-self:center; width:30px; height:30px; border-radius:50%; border:none; background:#2AC1BC; color:#fff; cursor:pointer; font-size:17px; display:flex; align-items:center; justify-content:center;"><i class="ti ti-plus" aria-hidden="true"></i></button>
+      </div>
+      <div style="display:flex; gap:9px; padding:7px 0;">
+        <div style="width:46px; height:46px; border-radius:10px; background:#E8F8F7; flex-shrink:0; display:flex; align-items:center; justify-content:center; color:#2AC1BC; font-size:22px;"><i class="ti ti-meat" aria-hidden="true"></i></div>
+        <div style="flex:1; min-width:0;">
+          <div style="font-size:13px; font-weight:500; color:#222;">제육볶음</div>
+          <div style="font-size:11px; color:#888;">★ 4.7 (1,560)</div>
+          <div style="font-size:13px; font-weight:700; color:#222; margin-top:2px;">11,000원</div>
+        </div>
+        <button onclick="sendPrompt('배민에서 제육볶음 담아줘')" aria-label="담기" style="align-self:center; width:30px; height:30px; border-radius:50%; border:none; background:#2AC1BC; color:#fff; cursor:pointer; font-size:17px; display:flex; align-items:center; justify-content:center;"><i class="ti ti-plus" aria-hidden="true"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#fff; border-radius:14px; overflow:hidden; border:0.5px solid rgba(0,0,0,0.08);">
+    <div style="background:#D70F64; padding:10px 12px; display:flex; align-items:center; gap:7px;">
+      <span style="font-size:15px; font-weight:700; color:#fff; letter-spacing:-0.5px;">쿠팡이츠</span>
+      <span style="margin-left:auto; font-size:11px; color:#fff; background:rgba(255,255,255,0.22); border-radius:999px; padding:2px 8px;">단건배달 19분</span>
+    </div>
+    <div style="padding:10px 12px;">
+      <div style="font-size:11px; color:#D70F64; font-weight:500; margin-bottom:8px;"><i class="ti ti-bolt" aria-hidden="true" style="vertical-align:-2px;"></i> 가장 빠른 배달</div>
+      <div style="display:flex; gap:9px; padding:7px 0; border-bottom:0.5px solid #eee;">
+        <div style="width:46px; height:46px; border-radius:10px; background:#FBE5EE; flex-shrink:0; display:flex; align-items:center; justify-content:center; color:#D70F64; font-size:22px;"><i class="ti ti-pizza" aria-hidden="true"></i></div>
+        <div style="flex:1; min-width:0;">
+          <div style="font-size:13px; font-weight:500; color:#222;">페퍼로니 피자 L</div>
+          <div style="font-size:11px; color:#888;">★ 4.9 (980)</div>
+          <div style="font-size:13px; font-weight:700; color:#222; margin-top:2px;">18,900원</div>
+        </div>
+        <button onclick="sendPrompt('쿠팡이츠에서 페퍼로니 피자 담아줘')" aria-label="담기" style="align-self:center; width:30px; height:30px; border-radius:8px; border:none; background:#D70F64; color:#fff; cursor:pointer; font-size:17px; display:flex; align-items:center; justify-content:center;"><i class="ti ti-plus" aria-hidden="true"></i></button>
+      </div>
+      <div style="display:flex; gap:9px; padding:7px 0;">
+        <div style="width:46px; height:46px; border-radius:10px; background:#FBE5EE; flex-shrink:0; display:flex; align-items:center; justify-content:center; color:#D70F64; font-size:22px;"><i class="ti ti-salad" aria-hidden="true"></i></div>
+        <div style="flex:1; min-width:0;">
+          <div style="font-size:13px; font-weight:500; color:#222;">치킨 샐러드</div>
+          <div style="font-size:11px; color:#888;">★ 4.6 (412)</div>
+          <div style="font-size:13px; font-weight:700; color:#222; margin-top:2px;">12,500원</div>
+        </div>
+        <button onclick="sendPrompt('쿠팡이츠에서 치킨 샐러드 담아줘')" aria-label="담기" style="align-self:center; width:30px; height:30px; border-radius:8px; border:none; background:#D70F64; color:#fff; cursor:pointer; font-size:17px; display:flex; align-items:center; justify-content:center;"><i class="ti ti-plus" aria-hidden="true"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#fff; border-radius:14px; overflow:hidden; border:0.5px solid rgba(0,0,0,0.08);">
+    <div style="background:#EB1F23; padding:10px 12px; display:flex; align-items:center; gap:7px;">
+      <span style="font-size:15px; font-weight:700; color:#fff; letter-spacing:-0.5px;">요기요</span>
+      <span style="margin-left:auto; font-size:11px; color:#fff; background:rgba(255,255,255,0.22); border-radius:999px; padding:2px 8px;">35분</span>
+    </div>
+    <div style="padding:10px 12px;">
+      <div style="font-size:11px; color:#EB1F23; font-weight:500; margin-bottom:8px;"><i class="ti ti-discount" aria-hidden="true" style="vertical-align:-2px;"></i> 할인 진행중</div>
+      <div style="display:flex; gap:9px; padding:7px 0; border-bottom:0.5px solid #eee;">
+        <div style="width:46px; height:46px; border-radius:10px; background:#FDE7E7; flex-shrink:0; display:flex; align-items:center; justify-content:center; color:#EB1F23; font-size:22px;"><i class="ti ti-soup" aria-hidden="true"></i></div>
+        <div style="flex:1; min-width:0;">
+          <div style="font-size:13px; font-weight:500; color:#222;">마라탕 (중)</div>
+          <div style="font-size:11px; color:#888;">★ 4.5 (1,887)</div>
+          <div style="font-size:13px; font-weight:700; color:#222; margin-top:2px;">13,800원</div>
+        </div>
+        <button onclick="sendPrompt('요기요에서 마라탕 담아줘')" aria-label="담기" style="align-self:center; width:30px; height:30px; border-radius:50%; border:none; background:#EB1F23; color:#fff; cursor:pointer; font-size:17px; display:flex; align-items:center; justify-content:center;"><i class="ti ti-plus" aria-hidden="true"></i></button>
+      </div>
+      <div style="display:flex; gap:9px; padding:7px 0;">
+        <div style="width:46px; height:46px; border-radius:10px; background:#FDE7E7; flex-shrink:0; display:flex; align-items:center; justify-content:center; color:#EB1F23; font-size:22px;"><i class="ti ti-bowl-chopsticks" aria-hidden="true"></i></div>
+        <div style="flex:1; min-width:0;">
+          <div style="font-size:13px; font-weight:500; color:#222;">탕수육 (소)</div>
+          <div style="font-size:11px; color:#888;">★ 4.4 (905)</div>
+          <div style="font-size:13px; font-weight:700; color:#222; margin-top:2px;">15,000원</div>
+        </div>
+        <button onclick="sendPrompt('요기요에서 탕수육 담아줘')" aria-label="담기" style="align-self:center; width:30px; height:30px; border-radius:50%; border:none; background:#EB1F23; color:#fff; cursor:pointer; font-size:17px; display:flex; align-items:center; justify-content:center;"><i class="ti ti-plus" aria-hidden="true"></i></button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div style="margin-top:12px; background:var(--color-background-primary); border:0.5px solid var(--color-border-tertiary); border-radius:14px; padding:13px 15px;">
+  <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+    <i class="ti ti-shopping-cart" aria-hidden="true" style="font-size:18px; color:var(--color-text-primary);"></i>
+    <span style="font-size:14px; font-weight:500; color:var(--color-text-primary);">jarvis 통합 장바구니</span>
+    <span style="margin-left:auto; font-size:12px; color:var(--color-text-secondary);">2개 brand · 3개 항목</span>
+  </div>
+
+  <div style="display:flex; align-items:center; gap:8px; padding:6px 0; font-size:13px;">
+    <span style="width:7px; height:7px; border-radius:50%; background:#2AC1BC; flex-shrink:0;"></span>
+    <span style="color:var(--color-text-primary);">김치찌개 정식 <span style="color:var(--color-text-tertiary);">· 배민</span></span>
+    <span style="margin-left:auto; color:var(--color-text-secondary);">9,500원</span>
+  </div>
+  <div style="display:flex; align-items:center; gap:8px; padding:6px 0; font-size:13px;">
+    <span style="width:7px; height:7px; border-radius:50%; background:#D70F64; flex-shrink:0;"></span>
+    <span style="color:var(--color-text-primary);">페퍼로니 피자 L <span style="color:var(--color-text-tertiary);">· 쿠팡이츠</span></span>
+    <span style="margin-left:auto; color:var(--color-text-secondary);">18,900원</span>
+  </div>
+  <div style="display:flex; align-items:center; gap:8px; padding:6px 0; font-size:13px; border-bottom:0.5px solid var(--color-border-tertiary);">
+    <span style="width:7px; height:7px; border-radius:50%; background:#D70F64; flex-shrink:0;"></span>
+    <span style="color:var(--color-text-primary);">치킨 샐러드 <span style="color:var(--color-text-tertiary);">· 쿠팡이츠</span></span>
+    <span style="margin-left:auto; color:var(--color-text-secondary);">12,500원</span>
+  </div>
+
+  <div style="display:flex; align-items:baseline; gap:8px; padding:11px 0 12px;">
+    <span style="font-size:13px; color:var(--color-text-secondary);">합계</span>
+    <span style="margin-left:auto; font-size:20px; font-weight:500; color:var(--color-text-primary);">40,900원</span>
+  </div>
+
+  <div style="font-size:11px; color:var(--color-text-tertiary); margin-bottom:11px; line-height:1.6;">
+    <i class="ti ti-route" aria-hidden="true" style="vertical-align:-2px;"></i> 주문 시 각 brand agent로 분배 — 배민 1건, 쿠팡이츠 1건. 결제·배달은 각 brand가 처리.
+  </div>
+
+  <button onclick="sendPrompt('이 장바구니 그대로 각 배달앱으로 주문 넣어줘')" style="width:100%; height:42px; border:none; border-radius:10px; background:var(--color-text-primary); color:var(--color-background-primary); font-size:14px; font-weight:500; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:7px;">
+    <i class="ti ti-check" aria-hidden="true"></i> 2개 brand에 한 번에 주문하기 ↗
+  </button>
+</div>
+
+</div>
