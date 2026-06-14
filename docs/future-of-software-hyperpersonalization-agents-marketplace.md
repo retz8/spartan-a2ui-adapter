@@ -27,10 +27,16 @@
   super-agent. Supply side: every brand is one registry entry. The thing that
   binds them is generative UI — the agent composing many brands' surfaces, in the
   moment, into one screen.
+- **This is more than standard A2UI (§4).** A2UI renders one agent's surface
+  faithfully; the super-agent wraps that with two out-of-protocol layers — an
+  *orchestrator* that decomposes raw input and routes sub-prompts to the right
+  agents, and a *compositor* that arranges the returned surfaces and computes
+  cross-agent facts. The protocol is the free road; these two layers are the
+  product.
 - **The agent composes; it does not overwrite.** Personalization happens at the
   level of *arrangement, selection, and flow* — not by repainting each brand in
   the user's theme. Each brand's catalog and styling are preserved. This is a
-  deliberate stance against an aesthetic filter bubble (§7), and it is what keeps
+  deliberate stance against an aesthetic filter bubble (§8), and it is what keeps
   the shared visual culture intact.
 
 ---
@@ -122,7 +128,74 @@ user: "order the top (A) and the trousers (B)"
 
 ---
 
-## 4. The marketplace: register once, summoned by every Jarvis
+## 4. What the super-agent adds on top of A2UI
+
+It is worth being precise here, because the model is easy to mistake for plain
+A2UI. Standard A2UI is **one agent ↔ one renderer**: an agent emits a surface and
+the renderer draws it faithfully, from the catalog, exactly as sent. The renderer
+is *passive* — it does not decide what to draw or in what order; all of that
+judgment lives in the single agent. There is no step for "which agent should this
+go to," and no notion of "combine several surfaces" — surfaces are independent.
+
+The super-agent keeps that faithful rendering at the leaf, but wraps it in **two
+active layers that live outside the A2UI protocol** — and those two layers are
+where the host's real work and IP sit.
+
+**Layer 1 — the orchestrator (input → routing).** A person's raw input ("what
+should I eat tonight") has nowhere to land in plain A2UI, which assumes an
+*already-chosen* agent is emitting a surface. The host adds a layer in front that:
+interprets the intent, decides *which* agents it implicates, and splits it into
+per-agent sub-prompts it routes out (to the delivery agents, "is this deliverable
+now?"; to the health agent, "what's today's calorie budget?"). This decomposition
+and routing is not part of A2UI — it is the host's own logic, the "intent routing
+is the host's IP" point made concrete.
+
+**Layer 2 — the compositor (surfaces → one screen).** A standard renderer draws
+*one* agent's surface. The host receives *many* and arranges them into a single
+screen — three delivery cards plus a YouTube panel plus a unified cart — and
+computes cross-agent facts no single agent could produce ("fastest of both: 19
+min", "this item vs. your remaining budget"). A2UI has no concept of composing
+multiple surfaces; this layer is the host's creation.
+
+So the honest answer to "isn't the UI just what each agent sends via A2UI?" is:
+**inside each surface, yes — faithfully, never overwritten; between the surfaces,
+no — that arrangement, bridging, and cross-agent reasoning is the host's.**
+
+```
+raw input ("eat tonight" → "butter tteok reviews" → "calories")
+   │
+   ▼
+[ host: orchestrator ]              ← outside A2UI · the host's IP
+   │ decompose intent + route sub-prompts
+   ├──▶ delivery agent ─▶ A2UI surface (menu cards)
+   ├──▶ youtube agent  ─▶ A2UI surface (review list)
+   └──▶ health agent   ─▶ A2UI surface (calorie budget)
+   │
+   ▼
+[ host: compositor ]               ← outside A2UI · the host's creation
+   │ arrange surfaces + compose cross-agent facts (unified cart, calorie verdict)
+   │ but each surface's interior is rendered faithfully (no overwrite)
+   ▼
+one screen
+```
+
+Standard A2UI is therefore just *one segment* of this picture — each "agent →
+surface" arrow is plain A2UI. The super-agent bundles many such segments, puts a
+router before them and a compositor after them. By analogy: standard A2UI is one
+interpreter relaying one speaker faithfully; the super-agent is the chair of a
+meeting who decides whom to ask what (router) and weaves the answers into one set
+of minutes (compositor). The interpreting is faithful; deciding whom to ask and
+how to weave is the chair's judgment.
+
+This is not a weakness of the idea — it locates its value. The A2UI protocol (the
+standard for rendering each surface) is the free road. The host's difficulty and
+defensibility live entirely in the two out-of-protocol layers: orchestration (how
+well it decomposes and routes) and composition (how well it weaves). The protocol
+is the easy part; these layers are the product.
+
+---
+
+## 5. The marketplace: register once, summoned by every Jarvis
 
 Here is the structural unlock. For a small brand to live inside conversational AI
 *today* means building a bespoke UI app for each host — one for one assistant,
@@ -159,7 +232,7 @@ a downloadable container of screens, dissolves.
 
 ---
 
-## 5. Does the agent still need the brand's catalog?
+## 6. Does the agent still need the brand's catalog?
 
 A genuine open question, and the answer is yes — but a specific *kind* of catalog.
 Consider shopping for a car across Tesla, Hyundai, BMW, Kia. Each brand has its own
@@ -191,7 +264,7 @@ while remaining a clean, composable surface.
 
 ---
 
-## 6. The agent composes; it does not overwrite
+## 7. The agent composes; it does not overwrite
 
 This is the heart of the stance, and it resolves a temptation that the previous
 section raises. If the host can arrange surfaces, why not let it also *restyle*
@@ -210,11 +283,11 @@ the flow from browse to configure to order — but the Tesla surface still looks
 Tesla and the BMW surface still looks like BMW. The personalization is in the
 *composition*, not in a coat of paint over everyone's identity.
 
-This is a design decision with a reason behind it, which §7 makes explicit.
+This is a design decision with a reason behind it, which §8 makes explicit.
 
 ---
 
-## 7. The shadow: hyperpersonalization and the aesthetic filter bubble
+## 8. The shadow: hyperpersonalization and the aesthetic filter bubble
 
 A vision document that only shows the bright side is not trustworthy. This one has
 a real shadow, and facing it is what makes the rest credible.
@@ -257,7 +330,7 @@ person's field would do the opposite of narrowing it.
 
 ### 7.3 The resolution: compose, don't overwrite
 
-The stance of §6 *is* the safeguard. Because the agent composes rather than
+The stance of §7 *is* the safeguard. Because the agent composes rather than
 repaints, brand identity — and with it the shared visual vocabulary — is preserved
 by construction. The Spider-Man fan gets a screen *arranged* for them (what
 appears, in what order, with what flow), while Tesla still looks like Tesla and
@@ -287,7 +360,7 @@ the shadow — they only keep it in check, on purpose.
 
 ---
 
-## 8. What this is, in the end
+## 9. What this is, in the end
 
 - **An app becomes a capability, not a place.** It is an `(agent, catalog)` pair
   in a public registry; "using" it is a person's agent summoning and composing its
